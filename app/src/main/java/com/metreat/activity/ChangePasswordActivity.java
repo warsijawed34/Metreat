@@ -48,6 +48,9 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         initView();  // init view method
         myToolbar();
         addListener();
+
+
+        
         strUserId= SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         strTokenId= SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
     }
