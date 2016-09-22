@@ -1,0 +1,22 @@
+<resources>
+    <!--Custom dimen-->
+
+    <dimen name="smaller_text">8sp</dimen>
+    <dimen name="smallest_text">10sp</dimen>
+    <dimen name="normal_text_minus">12sp</dimen>
+    <dimen name="normal_text">14sp</dimen>
+    <dimen name="normal_text_plus">16sp</dimen>
+    <dimen name="normal_text_large">18sp</dimen>
+    <dimen name="normal_text_large_extra">20sp</dimen>
+    <dimen name="large_text_minus">22sp</dimen>
+    <dimen name="large_text">26sp</dimen>
+    <dimen name="extra_large_text">35sp</dimen>
+    <dimen name="margin">5dp</dimen>
+    <dimen name="margin_large">18dp</dimen>
+    <dimen name="feedback_edittext">130dp</dimen>
+    <dimen name="menu_image">35dp</dimen>
+
+    <dimen name="buyNow_row_width">120dp</dimen>
+    <dimen name="buyNow_row_height">100dp</dimen>
+
+</resources>

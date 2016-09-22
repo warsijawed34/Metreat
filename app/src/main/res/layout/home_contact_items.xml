@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/default_margin_extra_large"
+                android:paddingRight="@dimen/default_margin_extra_large"
+                android:paddingTop="@dimen/default_margin_half">
+
+    <com.metreat.customViews.ImageViewRounded
+        android:id="@+id/ivProfileHeader"
+        android:layout_width="@dimen/margin_50"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/profile"/>
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin_large"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_toRightOf="@+id/ivProfileHeader"
+        android:text="Shampy Laura"
+        android:singleLine="true"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/normal_text_plus"/>
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123456789"
+        android:singleLine="true"
+        android:layout_below="@+id/tvUser"
+        android:layout_marginLeft="@dimen/default_margin_large"
+        android:layout_marginTop="@dimen/default_padding_half"
+        android:layout_toRightOf="@+id/ivProfileHeader"
+        android:layout_toEndOf="@+id/ivProfileHeader" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ivProfileHeader"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorGray"/>
+
+
+
+</RelativeLayout>

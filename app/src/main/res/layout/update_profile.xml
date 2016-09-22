@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/watermark_2"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <com.metreat.imageLoading.ImageViewRounded
+        android:id="@+id/iv_update_photo"
+        android:layout_width="@dimen/image_rounded"
+        android:layout_height="@dimen/image_rounded"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/profile"/>
+
+    <TextView
+        android:id="@+id/tv_upload_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/browseToUpload"
+        android:layout_below="@+id/iv_update_photo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:textSize="@dimen/normal_text_plus"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_upload_photo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="15dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/username"/>
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_username"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_line"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/profileName"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/email"/>
+
+            <View
+                android:id="@+id/view_line1"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_email"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_line1"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/email_address"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_mobileNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_mobileNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/phone"/>
+
+            <View
+                android:id="@+id/view_mobileNumber"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_mobileNumber"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_mobileNumber"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/mobileNo"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack"/>
+        </RelativeLayout>
+
+       <!-- <RelativeLayout
+            android:id="@+id/rl_dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_dob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/calender"/>
+
+            <View
+                android:id="@+id/view_line2"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_dob"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_line2"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/dateOfBirth"
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:focusable="false"
+                android:textColor="@color/colorBlack" />
+
+        </RelativeLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_margin_double"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/ivDob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/calender"/>
+
+            <View
+                android:id="@+id/viewDob"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_dob"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:hint="@string/dob"
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                android:focusable="false"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/normal_text_minus"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/relativeLayoutUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+        <ImageView
+            android:id="@+id/iv_addEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/default_margin_half"
+            android:visibility="gone"
+            android:background="@drawable/calender"/>
+
+    <!--    <RelativeLayout
+            android:id="@+id/rl_specialdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_specialdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/calender"/>
+
+            <View
+                android:id="@+id/view_line3"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_40"
+                android:layout_toRightOf="@+id/iv_specialdate"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_specialdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_line3"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/SpecialDates"
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:focusable="false"
+                android:textColor="@color/colorBlack"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
+                android:focusable="false"
+                android:background="@drawable/down" />
+        </RelativeLayout>-->
+
+        <RelativeLayout
+            android:id="@+id/rl_addressLine1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_addressLine1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/address"/>
+
+            <View
+                android:id="@+id/view_addressLine1"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_addressLine1"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_addressLine1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_addressLine1"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/address1"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_addressLine2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_addressLine2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/address"/>
+
+            <View
+                android:id="@+id/view_addressLine2"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_addressLine2"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_addressLine2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_addressLine2"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/address2"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/city"/>
+
+            <View
+                android:id="@+id/view_line5"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_city"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_line5"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/city"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_postalCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_postalCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/postal_code"/>
+
+            <View
+                android:id="@+id/view_postalCode"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_postalCode"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_postalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_postalCode"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/postalCode"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customborder">
+
+            <ImageView
+                android:id="@+id/iv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@drawable/country"/>
+
+            <View
+                android:id="@+id/view_line6"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_50"
+                android:layout_toRightOf="@+id/iv_country"
+                android:layout_marginLeft="@dimen/default_margin_large"
+                android:background="@color/login_textcolor_hint">
+            </View>
+
+            <EditText
+                android:id="@+id/et_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/view_line6"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/default_margin_double"
+                android:layout_centerVertical="true"
+                android:hint="@string/country"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_text_minus"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_save_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:layout_below="@+id/rl_country"
+            android:layout_marginTop="@dimen/default_margin_extra_large"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPurple"
+            android:textSize="@dimen/normal_text"/>
+    </LinearLayout>
+   </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,192 @@
+<resources>
+
+    <!--Validation-->
+    <string name="validate_emptyField">You cannot leave field empty</string>
+    <string name="validate_email">Please enter a valid email address</string>
+    <string name="validate_password">Password must contain at least 6 characters</string>
+    <string name="passwordValodation">Password should be atleast 6 characters long.</string>
+    <string name="msg_mobile">Please enter a valid Mobile Number</string>
+
+    <!--ToolbarTitle-->
+    <string name="loginTitle">Login</string>
+    <string name="forgetPassTitle">Forgot Password</string>
+    <string name="changePassTitle">Change Password</string>
+    <string name="resetPassTitle">Reset Password</string>
+    <string name="otpTitle">One Time Password</string>
+    <string name="registrationTitle">Register</string>
+    <string name="notifyTitle">Notifications</string>
+    <string name="homeTitle">Home</string>
+
+    <!--Login   167031223706480-->
+    <string name="app_name">MeTreat</string>
+    <string name="email_address">Enter Email Id</string>
+    <string name="email_idValidation">Please enter your Email Id</string>
+    <string name="password_validation">Please enter your Password</string>
+    <string name="password">Password</string>
+    <string name="forgetPassword"><u>FORGOT PASSWORD?</u></string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="loginFacebook">Login with Facebook</string>
+<!--    <string name="facebook_app_id">1167715549918402</string>-->
+    <string name="facebook_app_id">882404841847036</string>
+
+
+    <!--Forget password-->
+    <string name="forgetPasswordText">A confirmation mail will be sent to your registered email address to allow you to reset new password.</string>
+    <string name="forgotValidation">Please enter your registered Email Id</string>
+
+
+
+    <string name="submit">SUBMIT</string>
+
+    <!--Change Password-->
+    <string name="oldPassword">Enter Old Password</string>
+    <string name="newPassword">Enter New Password</string>
+    <string name="confirmPassword">Enter Confirm Password</string>
+    <string name="changePasswordText">You should create a strong password that uses
+        uppercase and lowercase letters, numbers, symbols, and spaces. Password should be atleast 6 characters long.</string>
+
+    <string name="oldPasswordValidation">Please enter old password</string>
+    <string name="newPasswordValidation">Please enter new password</string>
+    <string name="confirmPasswordValidation">Please enter confirm password</string>
+
+    <!--Reset Password-->
+    <string name="resetNewPassword">New Password</string>
+    <string name="resetConfirmPassword">Confirm Password</string>
+
+
+
+
+    <!--OTP-->
+    <string name="verify">VERIFY</string>
+    <string name="otpText">An OTP will be sent to the mentioned email address</string>
+    <string name="didnotReceiveOTP">Didn\'t receive OTP?</string>
+    <string name="resendOtp"><u>RESEND OTP</u></string>
+    <string name="otpCode">Enter OTP Code</string>
+
+    <!--registration-->
+    <string name="username">Enter Username</string>
+    <string name="profileName">Enter Profile Name</string>
+    <string name="passwordRegistration">Enter Password</string>
+    <string name="dob">Date of Birth</string>
+    <string name="occasion">Wedding</string>
+    <string name="date">01/05/2009</string>
+    <string name="address">Enter Address</string>
+    <string name="addressText">Your address will not be shared with any person you are connected with via Metreats. Connected friends will be able to send gifts to each other without having to ask for personal details.</string>
+    <string name="showAge">Show my age to friends</string>
+    <string name="addAddress">Do you want to add Address?</string>
+    <string name="agree">I Agree with terms &amp; conditions</string>
+    <string name="mobileNo">Mobile Number</string>
+
+    <string name="checkbox_msg_validation">Please agree with terms &amp; conditions</string>
+    <string name="address1">Address 1</string>
+    <string name="address2">Address 2</string>
+    <string name="postalCode">Postal Code</string>
+    <string name="event">Event</string>
+    <string name="otherEvents">Other Events</string>
+    <string name="eventDate">Event Date</string>
+    <string name="userValidation">Please enter profile name</string>
+    <string name="passwordValidation">Please enter password</string>
+    <string name="emailValidation">Please enter email id</string>
+    <string name="mobileNumberValidation">Please enter mobile number</string>
+    <string name="dateOfbirthValidation">Please enter date of birth</string>
+    <string name="otherEventsValidation">Please enter others events</string>
+    <string name="eventsDateValidation">Please enter event date</string>
+    <string name="address1Validation">Please enter address 1</string>
+    <string name="address2Validation">Please enter address 2</string>
+    <string name="cityValidation">Please enter city</string>
+    <string name="postalCodeValidation">Please enter postal code</string>
+    <string name="countryValidation">Please enter country</string>
+
+
+
+
+
+
+
+
+    <!--Notification-->
+    <string name="birthdayText">Today John\'s Birthday</string>
+    <string name="sendGiftText">Buy coupon and send as gift</string>
+
+    <!--Update profile Strings-->
+    <string name="updateProfile">Update Profile</string>
+    <string name="browseToUpload"><u>Browse to upload Photo</u></string>
+    <string name="john">John_2016</string>
+    <string name="johnEmail">john2016@gmail.com</string>
+    <string name="dateOfBirth">Date of Birth</string>
+    <string name="SpecialDates">Special Dates</string>
+    <string name="addressUpdate">Address</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="saveAndContinue">SAVE &amp; CONTINUE</string>
+    <string name="save">SAVE</string>
+    <string name="selectProfilePhoto">Select profile photo</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="userNameValidate">Please enter profile name</string>
+    <string name="emailValidate">Please enter email Id</string>
+    <string name="dobValidate">Please select date of birth</string>
+    <string name="specialDateValidate">Please select special dates</string>
+    <string name="addressValidate">Please enter address</string>
+    <string name="cityValidate">Please enter city</string>
+    <string name="countryValidate">Please enter country</string>
+
+    <!--My profile-->
+
+    <string name="myProfile">My Profile</string>
+    <string name="name">Name</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="dateOfAniv">Date of Anniversary</string>
+    <string name="ProfileAdress">Address</string>
+    <string name="dateOfEvent">Date of Event</string>
+
+
+    <!--Home-->
+    <string name="homeFriends">Friends</string>
+    <string name="homeRequest">Requests</string>
+    <string name="homeContacts">Contacts</string>
+
+    <!--setting-->
+    <string name="setting">Settings</string>
+    <string name="notification">Notification</string>
+    <string name="changePassword">Change Password</string>
+
+    <!--Received gifted Coupons Strings-->
+    <string name="receivedGiftedCoupons">Received Gifted Coupons</string>
+    <string name="giftedCoupons">Gifted Coupons</string>
+    <string name="couponName">Coupon Name</string>
+    <string name="couponPrice">Coupon Price</string>
+    <string name="couponBoughtDate">Coupon Bought Date</string>
+    <string name="giftedTO">Gifted To</string>
+    <string name="birthDayAniv">Birthday/Other Event</string>
+
+    <!--Buy Coupons Strings-->
+    <string name="buyCoupon">Buy Coupon</string>
+    <string name="buyNow">Buy Now</string>
+    <string name="descriptionCoupon">lorem, ipum agfhg Spiral pad consect dsgjh sgb  sg jhfb as gasj aa gjagfja ejusmod</string>
+    <string name="couponCat">Coupon Categories</string>
+
+
+
+
+
+
+    <!--Other Strings-->
+    <string name="ok">OK</string>
+    <string name="backAgainToExit">Please click BACK again to exit</string>
+
+    <string name="loading">Loading...</string>
+    <string name="internetConnection">Please connect with internet</string>
+    <string name="project_sender_id1">835027941026</string>
+    <string name="project_sender_id">539298659279</string>
+    <string name="facebook_login">FaceBook login</string>
+    <string name="sendRequest">Send Request</string>
+    <string name="already_granted">Permission already granted</string>
+    <string name="purchasedSuccessfully">Thank you, you have purchased the coupon successfully</string>
+    <string name="alertMsg">Are you sure you want to remove from friend list?</string>
+    <string name="viewMore">View more</string>
+    <string name="viewLess">View less</string>
+
+
+</resources>

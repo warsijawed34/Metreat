@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <color name="colorPrimary">#4A148C</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--Login-->
+    <color name="colorPurple">#560AA2</color>
+    <color name="colorPurpleLight">#936CDA</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="myprofile_text_color1">#FCFCFD</color>
+    <color name="login_textcolor_hint">#B4B4B4</color>
+    <color name="vertical_line_color">#EBEBEB</color>
+    <color name="gray_text_color">#A8A8A8</color>
+    <color name="colorGray">#D6D6D6</color>
+    <color name="colorSemiBlack">#AA000000</color>
+    <color name="graySettingBorder">#F4F4F4</color>
+    <color name="redColor">#F03B4E</color>
+
+
+</resources>
+
+
+
+
+
+
+
+<!--In Case you need them for reference-->
+<!--
+<color name="colorGray">#D6D6D6</color>
+<color name="colorGrayDark">#7B7B7B</color>
+
+<color name="colorGreen">#39B428</color>
+<color name="colorOrange">#F87C22</color>
+<color name="colorSemiBlack">#AA000000</color>
+
+<color name="colorHint">#D0D0D0</color>
+<color name="colorYellow">#FBCD08</color>
+<color name="colorBlackToolbar">#333333</color>
+<color name="colorLightGray">#EFEFEF</color>
+<color name="colorRed">#FF0000</color>
+<color name="greyish">#767676</color>
+
+<color name="colorGraytext">#5C5C5C</color>
+<color name="colorBlackGray">#262626</color>
+<color name="colorview">#C6CAD0</color>
+
+<color name="colorforget">#a5a5a5</color>
+<color name="colorPopup">#ECECEC</color>
+-->
+

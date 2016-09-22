@@ -1,0 +1,24 @@
+<resources>
+    <!--Custom dimen-->
+    <dimen name="smaller_text">10sp</dimen>
+    <dimen name="smallest_text">12sp</dimen>
+    <dimen name="normal_text_minus">14sp</dimen>
+    <dimen name="normal_text">16sp</dimen>
+    <dimen name="normal_text_plus">18sp</dimen>
+    <dimen name="normal_text_large">20sp</dimen>
+    <dimen name="normal_text_large_extra">22sp</dimen>
+    <dimen name="large_text_minus">26sp</dimen>
+    <dimen name="large_text">30sp</dimen>
+    <dimen name="extra_large_text">38sp</dimen>
+    <dimen name="margin">7dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="feedback_edittext">150dp</dimen>
+    <dimen name="menu_image">45dp</dimen>
+    <dimen name="padding_setting">15dp</dimen>
+    <dimen name="padding_row_bunow">25dp</dimen>
+    <dimen name="buyNow_row_width">125dp</dimen>
+    <dimen name="buyNow_row_height">105dp</dimen>
+    <dimen name="row_buyNow_textHeight">50dp</dimen>
+    <dimen name="send_request_height">35dp</dimen>
+
+</resources>

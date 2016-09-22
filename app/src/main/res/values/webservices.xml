@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_url">http://i.vinove.com/mockapi/backend/web/index.php/mockapi?project=MeTreat</string>
+    <string name="api_url1">http://i.vinove.com/a_me-treat/backend/web/api</string>
+
+</resources>

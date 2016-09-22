@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--
+    <RelativeLayout
+        android:id="@+id/rlOccasion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:clickable="true"
+        android:visibility="visible"
+        android:background="@drawable/customborder">
+
+        <ImageView
+            android:id="@+id/ivOccasion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_margin_large"
+            android:background="@drawable/down"/>
+
+        <View
+            android:id="@+id/viewOccasion"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/margin_50"
+            android:layout_toRightOf="@+id/ivOccasion"
+            android:layout_marginLeft="@dimen/default_margin_large1"
+            android:background="@color/login_textcolor_hint">
+        </View>
+
+        <EditText
+            android:id="@+id/edOccasion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/viewOccasion"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/default_margin_double"
+            android:layout_centerVertical="true"
+            android:hint="@string/otherEvents"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:focusable="false"
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/normal_text_minus"/>
+
+    </RelativeLayout>-->
+
+    <LinearLayout
+        android:id="@+id/llOccasion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:visibility="visible"
+        android:background="@drawable/customborder">
+
+        <ImageView
+            android:id="@+id/ivOccasion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/default_margin_double"
+            android:background="@drawable/down"/>
+
+        <View
+            android:id="@+id/viewOccasion"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/margin_50"
+            android:layout_marginLeft="@dimen/default_margin1"
+            android:background="@color/login_textcolor_hint">
+        </View>
+
+        <EditText
+            android:id="@+id/edOccasion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/default_margin_double"
+            android:hint="@string/otherEvents"
+            android:imeOptions="actionNext"
+            android:inputType="date"
+            android:focusable="false"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/normal_text_minus"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llOccasionDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/default_margin_double"
+        android:visibility="visible"
+        android:background="@drawable/customborder">
+
+        <ImageView
+            android:id="@+id/ivOccasionDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/default_margin_large"
+            android:background="@drawable/calender"/>
+
+        <View
+            android:id="@+id/viewOccasionDate"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/margin_50"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:background="@color/login_textcolor_hint">
+        </View>
+
+        <EditText
+            android:id="@+id/edOccasionDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/default_margin_double"
+            android:hint="@string/eventDate"
+            android:imeOptions="actionNext"
+            android:inputType="date"
+            android:focusable="false"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/normal_text_minus"/>
+
+    </LinearLayout>
+ <!--   <RelativeLayout
+        android:id="@+id/rlOccasionDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_double"
+        android:visibility="visible"
+        android:background="@drawable/customborder">
+
+        <ImageView
+            android:id="@+id/ivOccasionDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_margin_large"
+            android:background="@drawable/calender"/>
+
+        <View
+            android:id="@+id/viewOccasionDate"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/margin_50"
+            android:layout_toRightOf="@+id/ivOccasionDate"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:background="@color/login_textcolor_hint">
+        </View>
+
+        <EditText
+            android:id="@+id/edOccasionDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/viewOccasionDate"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/default_margin_double"
+            android:layout_centerVertical="true"
+            android:hint="@string/eventDate"
+            android:imeOptions="actionNext"
+            android:inputType="date"
+            android:focusable="false"
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/normal_text_minus"/>
+
+    </RelativeLayout>-->
+
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/watermark_2"
+    android:focusableInTouchMode="true">
+
+    <RelativeLayout
+        android:id="@+id/rlEnterUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray">
+
+        <EditText
+            android:id="@+id/ed_searchHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_username_border"
+            android:hint="Enter Username"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:drawableRight="@drawable/search"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rlEnterUsername"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/default_margin_large"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/tvHomeFriends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/home_custom_border_friends"
+            android:gravity="center"
+            android:text="@string/homeFriends"
+            android:textColor="@color/colorPurpleLight"
+            android:singleLine="true"
+            android:padding="@dimen/default_margin_half"
+            android:textSize="@dimen/normal_text"/>
+
+        <TextView
+            android:id="@+id/tvHomeReqSent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/home_custom_border_request_sent"
+            android:gravity="center"
+            android:text="@string/homeRequest"
+            android:textColor="@color/colorPurpleLight"
+            android:singleLine="true"
+            android:padding="@dimen/default_margin_half"
+            android:textSize="@dimen/normal_text"/>
+
+        <TextView
+            android:id="@+id/tvHomeContacts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/home_custom_border_contacts"
+            android:gravity="center"
+            android:text="@string/homeContacts"
+            android:textColor="@color/colorPurpleLight"
+            android:singleLine="true"
+            android:padding="@dimen/default_margin_half"
+            android:textSize="@dimen/normal_text"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llHome"
+        android:visibility="visible"
+        android:layout_marginTop="15dp">
+    </android.support.v7.widget.RecyclerView>
+
+<!--    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sorry. No record found"
+        android:id="@+id/tvNorecordFound"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/normal_text_large"
+        android:visibility="gone"/>-->
+
+
+</RelativeLayout>

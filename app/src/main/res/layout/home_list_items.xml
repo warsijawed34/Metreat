@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/default_margin_extra_large"
+                android:paddingRight="@dimen/default_margin_extra_large"
+                android:paddingTop="@dimen/default_margin_half">
+
+    <com.metreat.customViews.ImageViewRounded
+        android:id="@+id/ivProfileHeader"
+        android:layout_width="@dimen/margin_50"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/profile"/>
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin_large"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/ivProfileHeader"
+        android:text=""
+        android:singleLine="true"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/normal_text_plus"/>
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:singleLine="true"
+        android:layout_below="@+id/tvUser"
+        android:layout_marginLeft="@dimen/default_margin_large"
+        android:layout_toRightOf="@+id/ivProfileHeader"
+        android:layout_toEndOf="@+id/ivProfileHeader" />
+
+    <Button
+        android:id="@+id/btnSendRequest"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/send_request_height"
+        android:text="Send Request"
+        android:textSize="@dimen/smallest_text"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"
+        android:textAllCaps="false"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/padding_setting"/>
+    <Button
+        android:id="@+id/btnInvite"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/send_request_height"
+        android:text=""
+        android:padding="10dp"
+        android:textSize="@dimen/smallest_text"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/colorWhite"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/padding_setting"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivRemove"
+        android:src="@drawable/close_purple"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:layout_marginTop="@dimen/padding_setting"/>
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_setting"
+        android:visibility="visible"
+        android:layout_below="@+id/ivProfileHeader">
+        <Button
+            android:id="@+id/btnAccept"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/send_request_height"
+            android:text="Accept"
+            android:textSize="@dimen/smallest_text"
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:layout_gravity="left"/>
+
+        <Button
+            android:id="@+id/btnReject"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/send_request_height"
+            android:text="Reject"
+            android:textSize="@dimen/smallest_text"
+            android:background="@drawable/rounded_button_white"
+            android:padding="10dp"
+            android:textAllCaps="false"
+            android:layout_gravity="right"/>
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/frame_layout"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorGray"
+        android:id="@+id/view" />
+</RelativeLayout>

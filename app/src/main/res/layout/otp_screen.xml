@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    android:background="@drawable/watermark_2"
+                android:focusableInTouchMode="true">
+
+    <include
+        android:id="@+id/loginTool"
+        layout="@layout/common_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/loginTool">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_extra_large"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/appLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_40"
+                android:background="@drawable/otp_logo"/>
+
+            <TextView
+                android:id="@+id/tvOtpText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin_double"
+                android:layout_marginRight="@dimen/default_margin_double"
+                android:layout_marginTop="@dimen/margin_50"
+                android:gravity="center"
+                android:text="@string/otpText"
+                android:textSize="@dimen/normal_text_minus" />
+
+
+            <RelativeLayout
+                android:id="@+id/rlEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_40"
+                android:background="@drawable/customborder">
+
+                <ImageView
+                    android:id="@+id/iv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/default_margin_large"
+                    android:background="@drawable/password"/>
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/margin_50"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_toRightOf="@+id/iv_username"
+                    android:background="@color/login_textcolor_hint">
+                </View>
+
+                <EditText
+                    android:id="@+id/edOtpCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/view_line"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/otpCode"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapCharacters"
+                    android:paddingLeft="@dimen/default_margin_double"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/normal_text_minus"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:background="@color/colorPurple"
+                android:text="@string/verify"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/normal_text"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_double"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/didnotReceiveOTP"
+                    android:textSize="@dimen/normal_text_plus"
+                    android:textColor="@color/colorSemiBlack"/>
+
+                <TextView
+                    android:id="@+id/tvResendOtp"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/resendOtp"
+                    android:textSize="@dimen/normal_text_plus"
+                    android:textColor="@color/colorSemiBlack"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
