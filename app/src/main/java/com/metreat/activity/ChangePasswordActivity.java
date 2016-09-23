@@ -192,7 +192,6 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         overridePendingTransition(0, R.anim.exit_slide_right);
-
                     }else {
                         CommonUtils.showToast(mContext,JSONUtils.getStringFromJSON(jsonObject,"message"));
                     }

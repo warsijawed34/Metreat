@@ -49,7 +49,7 @@ public class BaseActivityDrawerMenu extends AppCompatActivity implements OnWebSe
     private MenuBaseAdapter menuAdapter;
     View headerView;
     public SimpleDateFormat dateFormatResult,dateFormatResultOccasion,newDateFomate,dateFormatEvent;
-    public String userName, StrProfilePic, userId;
+    public String userName, StrProfilePic, userId, tokenId;
     ImageLoader imgL;
     CallWebService webService;
 
@@ -79,6 +79,7 @@ public class BaseActivityDrawerMenu extends AppCompatActivity implements OnWebSe
         userName= SharedPreferencesManger.getPrefValue(mContext, Constants.USERNAME, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         StrProfilePic= SharedPreferencesManger.getPrefValue(mContext, Constants.IMAGES, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         userId = SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
+        tokenId = SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
     }
 
     public void setContentView(int layoutResID){
@@ -152,7 +153,7 @@ public class BaseActivityDrawerMenu extends AppCompatActivity implements OnWebSe
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
-                       // logoutApi(userId);
+                        logoutApi(userId, tokenId);
                         break;
                     default:
                         break;
@@ -179,12 +180,13 @@ public class BaseActivityDrawerMenu extends AppCompatActivity implements OnWebSe
     protected void addListener(){};
     protected void myToolbar(){};
 
-    private void logoutApi(String userId) {
+    private void logoutApi(String userId, String tokenId) {
         try {
             if (new ConnectionDetector(mContext).isConnectingToInternet()) {
                 Hashtable<String, String> params = new Hashtable<>();
                 JSONObject jObject = new JSONObject();
                 jObject.put("method", "logout");
+                jObject.put("tokenID", tokenId);
                 jObject.put("userID", userId);
                 params.put("json_data", jObject.toString());
                 System.out.println("Request: " + params);
