@@ -45,8 +45,8 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_password);
         mContext = ChangePasswordActivity.this;
-        initView();  // init view method
-        myToolbar();
+        initView();
+        myToolbar();// tool bar bar method
         addListener();
 
 
