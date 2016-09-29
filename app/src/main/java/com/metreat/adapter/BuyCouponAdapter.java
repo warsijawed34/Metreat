@@ -27,7 +27,6 @@ import java.util.List;
 public class  BuyCouponAdapter extends RecyclerView.Adapter<BuyCouponAdapter.MyViewHolder> {
     List<BuyCouponModel> buyCouponList;
     Context mContext;
-    public static BuyCouponClickListner listClickListener;
     int lineCount;
 
     public BuyCouponAdapter(Context context) {
@@ -45,6 +44,18 @@ public class  BuyCouponAdapter extends RecyclerView.Adapter<BuyCouponAdapter.MyV
         buyCouponList.add(model);
     }
 
+    public int getCount() {
+        return buyCouponList.size();
+    }
+
+    public Boolean hasArrayItems() {
+        if (buyCouponList.size() > 0) {
+            return true;
+
+        }
+        return false;
+    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
       final BuyCouponModel model=buyCouponList.get(position);
@@ -58,8 +69,10 @@ public class  BuyCouponAdapter extends RecyclerView.Adapter<BuyCouponAdapter.MyV
             public void run() {
                 lineCount = holder.tvDescription.getLineCount();
                 if(lineCount>4){
+                    holder.tvViewMore.setText("View more");
                     holder.tvViewMore.setVisibility(View.VISIBLE);
                 }else {
+                    holder.tvViewLess.setText("View less");
                     holder.tvViewMore.setVisibility(View.INVISIBLE);
                 }
             }
@@ -107,38 +120,24 @@ public class  BuyCouponAdapter extends RecyclerView.Adapter<BuyCouponAdapter.MyV
      return buyCouponList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-           public TextView tvName;
-           public TextView tvDescription;
-           public TextView tvAmount;
-           public ImageView ivBuyCouponImage;
-           public Button btnBuyNow;
-           public TextView tvViewMore,tvViewLess;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvName;
+        public TextView tvDescription;
+        public TextView tvAmount;
+        public ImageView ivBuyCouponImage;
+        public Button btnBuyNow;
+        public TextView tvViewMore, tvViewLess;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvName= (TextView) itemView.findViewById(R.id.tv_buyCouponOffer);
-            tvDescription= (TextView) itemView.findViewById(R.id.tv_buyCouponDescription);
-            tvAmount= (TextView) itemView.findViewById(R.id.tv_buyCouponPrice);
-            ivBuyCouponImage= (ImageView) itemView.findViewById(R.id.iv_buyCouponImage);
-            btnBuyNow= (Button) itemView.findViewById(R.id.btn_buyNow);
-            tvViewMore= (TextView) itemView.findViewById(R.id.tvViewMore);
-            tvViewLess= (TextView) itemView.findViewById(R.id.tvViewLess);
-            itemView.setOnClickListener(this);
+            tvName = (TextView) itemView.findViewById(R.id.tv_buyCouponOffer);
+            tvDescription = (TextView) itemView.findViewById(R.id.tv_buyCouponDescription);
+            tvAmount = (TextView) itemView.findViewById(R.id.tv_buyCouponPrice);
+            ivBuyCouponImage = (ImageView) itemView.findViewById(R.id.iv_buyCouponImage);
+            btnBuyNow = (Button) itemView.findViewById(R.id.btn_buyNow);
+            tvViewMore = (TextView) itemView.findViewById(R.id.tvViewMore);
+            tvViewLess = (TextView) itemView.findViewById(R.id.tvViewLess);
         }
-
-    @Override
-    public void onClick(View v) {
-        listClickListener.onItemClick(getPosition(), v);
     }
-}
-
-    public void setOnItemClickListener(BuyCouponClickListner myClickListener) {
-        this.listClickListener = myClickListener;
-    }
-
-public interface BuyCouponClickListner {
-    public void onItemClick(int position, View v);
-}
 }
 

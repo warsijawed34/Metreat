@@ -29,7 +29,6 @@ import java.util.List;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder> {
     List<NotificationModel> notificationList;
     Context mContext;
-    public static NotificationClickListner listClickListener;
     String eventDate;
 
     public NotificationAdapter(Context context) {
@@ -43,37 +42,38 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 inflate(R.layout.notification_list_item, parent, false);
         return new MyViewHolder(itemView);
     }
+
     public void addtoArray(NotificationModel notificationModel) {
         notificationList.add(notificationModel);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final NotificationModel model=notificationList.get(position);
+        final NotificationModel model = notificationList.get(position);
 
         SimpleDateFormat input = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM");
         try {
             Date oneWayTripDate = input.parse(model.getEventDate());
-            eventDate=output.format(oneWayTripDate).toString();
-        }catch (ParseException e) {
+            eventDate = output.format(oneWayTripDate).toString();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        String eventMsg=model.getName()+"'s "+model.getAge() +" "+model.getEventType();
+        String eventMsg = model.getName() + "'s " + model.getAge() + " " + model.getEventType();
 
-        if(model.getEventDate().equalsIgnoreCase(CommonUtils.getCalculatedDate("yyyy-MM-dd", 0))){
-            holder.tvName.setText("Today is "+eventMsg);
-        }else if (model.getEventDate().equalsIgnoreCase(CommonUtils.getCalculatedDate("yyyy-MM-dd", 1))){
-            holder.tvName.setText("Tomorrow is "+eventMsg);
-        }else{
-            holder.tvName.setText(eventDate+" "+eventMsg);
+        if (model.getEventDate().equalsIgnoreCase(CommonUtils.getCalculatedDate("yyyy-MM-dd", 0))) {
+            holder.tvName.setText("Today is " + eventMsg);
+        } else if (model.getEventDate().equalsIgnoreCase(CommonUtils.getCalculatedDate("yyyy-MM-dd", 1))) {
+            holder.tvName.setText("Tomorrow is " + eventMsg);
+        } else {
+            holder.tvName.setText(eventDate + " " + eventMsg);
         }
 
 
         holder.btnBuyCoupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, CouponCatActivity.class);
+                Intent intent = new Intent(mContext, CouponCatActivity.class);
                 intent.putExtra("recieverId", model.getReceiverID());
                 mContext.startActivity(intent);
             }
@@ -83,34 +83,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public int getItemCount() {
- ;       return notificationList.size();
+        ;
+        return notificationList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvName;
         public Button btnBuyCoupon;
         public ImageView ivImageGift;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvName= (TextView) itemView.findViewById(R.id.tvNameId);
-            btnBuyCoupon= (Button) itemView.findViewById(R.id.btnBuyCouponId);
-            ivImageGift= (ImageView) itemView.findViewById(R.id.ivNotification);
-            itemView.setOnClickListener(this);
+            tvName = (TextView) itemView.findViewById(R.id.tvNameId);
+            btnBuyCoupon = (Button) itemView.findViewById(R.id.btnBuyCouponId);
+            ivImageGift = (ImageView) itemView.findViewById(R.id.ivNotification);
         }
 
-    @Override
-    public void onClick(View v) {
-        listClickListener.onItemClick(getPosition(), v);
-    }
-}
-
-    public void setOnItemClickListener(NotificationClickListner myClickListener) {
-        this.listClickListener = myClickListener;
     }
 
-public interface NotificationClickListner {
-    public void onItemClick(int position, View v);
 }
-}
-

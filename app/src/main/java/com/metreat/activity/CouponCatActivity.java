@@ -136,33 +136,37 @@ public class CouponCatActivity extends BaseActivityDrawerMenu implements View.On
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
         switch (type){
             case COUPONCAT:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if(code==200){
-                        jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "catList");
-                        CouponCatModel model;
-                        JSONObject resultObject;
-                        for (int i = 0; i < jsonArray.length(); i++){
-                            resultObject = jsonArray.getJSONObject(i);
-                            model = new CouponCatModel();
-                            model.setId(JSONUtils.getStringFromJSON(resultObject,"id"));
-                            model.setName(JSONUtils.getStringFromJSON(resultObject,"name"));
-                            model.setDetails(JSONUtils.getStringFromJSON(resultObject,"details"));
-                            model.setImage(JSONUtils.getStringFromJSON(resultObject,"image"));
-                            model.setReceiverID(receiverId);
-                            adapter.addToArray(model);
+                if (result!=null) {
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
+                            jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "catList");
+                            CouponCatModel model;
+                            JSONObject resultObject;
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                resultObject = jsonArray.getJSONObject(i);
+                                model = new CouponCatModel();
+                                model.setId(JSONUtils.getStringFromJSON(resultObject, "id"));
+                                model.setName(JSONUtils.getStringFromJSON(resultObject, "name"));
+                                model.setDetails(JSONUtils.getStringFromJSON(resultObject, "details"));
+                                model.setImage(JSONUtils.getStringFromJSON(resultObject, "image"));
+                                model.setReceiverID(receiverId);
+                                adapter.addToArray(model);
+                            }
+                            mRecyclerView.setAdapter(adapter);
+
+                        } else {
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+
                         }
-                        mRecyclerView.setAdapter(adapter);
 
-                    }else {
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else {
+                    CommonUtils.showToast(mContext,getString(R.string.dataNotFound));
                 }
                 break;
         }

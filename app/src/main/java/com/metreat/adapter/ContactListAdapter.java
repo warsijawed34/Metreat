@@ -187,7 +187,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         }
 
     }
-
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -207,7 +206,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                         //I'm not sure how you're going to do comparison, so you'll need to fill out this conditional
                         if (data.getUserName().toLowerCase().contains(charSequence)) {
                             filterResultsData.add(data);
-
                             notifyDataSetChanged();
                             msgReq = true;
                         }
@@ -228,7 +226,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             protected void publishResults(CharSequence charSequence, Filter.FilterResults filterResults) {
                 contactList = (ArrayList<syncContactsModel>) filterResults.values;
                 notifyDataSetChanged();
-
 
             }
         };

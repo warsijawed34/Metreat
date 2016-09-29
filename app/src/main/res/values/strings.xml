@@ -187,6 +187,9 @@
     <string name="alertMsg">Are you sure you want to remove from friend list?</string>
     <string name="viewMore">View more</string>
     <string name="viewLess">View less</string>
+    <string name="dataNotFound">Data not found</string>
+    <string name="check_connection">Please check your internet connection.</string>
+    <string name="no_network_connection">No Network Connection</string>
 
 
 </resources>

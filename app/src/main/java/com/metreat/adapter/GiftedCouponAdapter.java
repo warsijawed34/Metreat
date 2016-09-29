@@ -24,7 +24,7 @@ import java.util.List;
 public class GiftedCouponAdapter extends RecyclerView.Adapter<GiftedCouponAdapter.MyViewHolder> {
     List<GiftedCouponsModel> giftedCouponList;
     Context mContext;
-    public static GiftedCouponClickListner listClickListener;
+ //   public static GiftedCouponClickListner listClickListener;
 
     public GiftedCouponAdapter(Context context) {
         this.mContext = context;
@@ -37,23 +37,38 @@ public class GiftedCouponAdapter extends RecyclerView.Adapter<GiftedCouponAdapte
                 inflate(R.layout.received_gifted_item, parent, false);
         return new MyViewHolder(itemView);
     }
+
     public void addtoArray(GiftedCouponsModel giftedCouponsModel) {
         giftedCouponList.add(giftedCouponsModel);
     }
 
+
+    public int getCount() {
+        return giftedCouponList.size();
+    }
+
+    public Boolean hasArrayItems() {
+        if (giftedCouponList.size() > 0) {
+            return true;
+
+        }
+        return false;
+    }
+
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-      GiftedCouponsModel model=giftedCouponList.get(position);
+        GiftedCouponsModel model = giftedCouponList.get(position);
         holder.tvCName.setText(model.getcName());
-        holder.tvCPrice.setText("$"+model.getcPrice());
+        holder.tvCPrice.setText("$" + model.getcPrice());
 
-       //change date formate of Bought date
+        //change date formate of Bought date
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat output = new SimpleDateFormat("dd MMMM, yyyy");
         try {
             Date oneWayTripDate = input.parse(model.getcBoughtDate());
             holder.tvCBoughtCoupon.setText(output.format(oneWayTripDate));
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -65,17 +80,17 @@ public class GiftedCouponAdapter extends RecyclerView.Adapter<GiftedCouponAdapte
         try {
             Date oneWayTripDate = input.parse(model.getBirthDayAniv());
             holder.tvBirthAniv.setText(output.format(oneWayTripDate));
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public int getItemCount() {
-     return giftedCouponList.size();
+        return giftedCouponList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvCName;
         public TextView tvCPrice;
         public TextView tvCBoughtCoupon;
@@ -84,15 +99,15 @@ public class GiftedCouponAdapter extends RecyclerView.Adapter<GiftedCouponAdapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvCName= (TextView) itemView.findViewById(R.id.tv_CName);
-            tvCPrice= (TextView) itemView.findViewById(R.id.tv_CPrice);
-            tvCBoughtCoupon= (TextView) itemView.findViewById(R.id.tv_coupon_bought_date);
-            tvGiftedTo= (TextView) itemView.findViewById(R.id.tv_gifted_to);
-            tvBirthAniv= (TextView) itemView.findViewById(R.id.tv_birthdayAniv);
-            itemView.setOnClickListener(this);
+            tvCName = (TextView) itemView.findViewById(R.id.tv_CName);
+            tvCPrice = (TextView) itemView.findViewById(R.id.tv_CPrice);
+            tvCBoughtCoupon = (TextView) itemView.findViewById(R.id.tv_coupon_bought_date);
+            tvGiftedTo = (TextView) itemView.findViewById(R.id.tv_gifted_to);
+            tvBirthAniv = (TextView) itemView.findViewById(R.id.tv_birthdayAniv);
+            //   itemView.setOnClickListener(this);
         }
 
-    @Override
+ /*   @Override
     public void onClick(View v) {
         listClickListener.onItemClick(getPosition(), v);
     }
@@ -104,6 +119,6 @@ public class GiftedCouponAdapter extends RecyclerView.Adapter<GiftedCouponAdapte
 
 public interface GiftedCouponClickListner {
     public void onItemClick(int position, View v);
+}*/
+    }
 }
-}
-

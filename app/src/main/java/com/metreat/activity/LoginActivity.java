@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
@@ -21,9 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -31,8 +28,6 @@ import com.facebook.FacebookSdk;
 
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -40,7 +35,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.metreat.Interface.OnWebServiceResult;
 import com.metreat.R;
-import com.metreat.gcmPushNotisfication.RegistrationIntentService;
+import com.metreat.gcmPushNotification.RegistrationIntentService;
 import com.metreat.network.ConnectionDetector;
 import com.metreat.pereferences.SharedPreferencesManger;
 import com.metreat.utils.CallWebService;
@@ -87,7 +82,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getfaceBookShaKey();
+        getfaceBookShaKey();
         FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
 
@@ -199,8 +194,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 webService = new CallWebService(mContext, new WebServiceApis(mContext).callApi(), params, Constants.SERVICE_TYPE.LOGIN, this);
                 webService.execute();
             } else {
-                CommonUtils.showToast(mContext, getString(R.string.internetConnection));
-            }
+                CommonUtils.showAlertDialog(this,getString(R.string.no_network_connection),
+                        getString(R.string.check_connection));            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -270,7 +265,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
 
     }
-
 
     private void loginWithFacebook() {
         LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends","email"));
@@ -429,6 +423,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onResume() {
         super.onResume();
         registerReceiver();
+    }
+
+    public String testToast(){
+
+        return null;
     }
 
     @Override

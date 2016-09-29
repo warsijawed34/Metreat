@@ -7,9 +7,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -51,7 +54,6 @@ public class CommonUtils {
         dialog.show();
     }
 
-//
 //    public static void showAlertDialogWith2Btn(Context mContext, String title, String message) {
 //
 //        if (mContext == null) return;
@@ -90,7 +92,21 @@ public class CommonUtils {
 //        messageTv.setText(message);
 //        buttonTv.setText(button);
 //        customDialog.show();
-//    }
+  // }
+
+/*
+
+   public static void showCustomDialog(Context context, String message, String button){
+       customDialog = new Dialog(context);
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        customDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        customDialog.setContentView(R.layout.custom_dialog);
+        messageTv = (TextView) customDialog.findViewById(R.id.tv_message);
+        buttonTv= (TextView) customDialog.findViewById(R.id.tv_button);
+        messageTv.setText(message);
+        buttonTv.setText(button);
+        customDialog.show();
+     }*/
 
     public static void showToast(Context mContext, String message) {
         Toast toast = Toast.makeText(mContext, message, Toast.LENGTH_SHORT);

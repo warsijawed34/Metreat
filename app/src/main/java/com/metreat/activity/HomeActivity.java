@@ -313,7 +313,9 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
                 webService = new CallWebService(mContext, new WebServiceApis(mContext).callApi(), params, Constants.SERVICE_TYPE.SYNCCONTACTS, this);
                 webService.execute();
             } else {
-                CommonUtils.showToast(mContext, getString(R.string.internetConnection));
+             //   CommonUtils.showToast(mContext, getString(R.string.internetConnection));
+                CommonUtils.showAlertDialog(this,getString(R.string.no_network_connection),
+                        getString(R.string.check_connection));
             }
         } catch (Exception e) {
             e.printStackTrace();

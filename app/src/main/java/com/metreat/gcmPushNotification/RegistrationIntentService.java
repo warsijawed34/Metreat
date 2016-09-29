@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.metreat.gcmPushNotisfication;
+package com.metreat.gcmPushNotification;
 
 import android.app.IntentService;
 import android.content.Intent;

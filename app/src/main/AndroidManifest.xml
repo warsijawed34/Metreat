@@ -145,21 +145,21 @@
 
 
         <service
-            android:name="com.metreat.gcmPushNotisfication.GcmListenerService"
+            android:name="com.metreat.gcmPushNotification.GcmListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
             </intent-filter>
         </service>
         <service
-            android:name="com.metreat.gcmPushNotisfication.InstanceIDListenerService"
+            android:name="com.metreat.gcmPushNotification.InstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
         <service
-            android:name="com.metreat.gcmPushNotisfication.RegistrationIntentService"
+            android:name="com.metreat.gcmPushNotification.RegistrationIntentService"
             android:exported="false"></service>
 
     </application>

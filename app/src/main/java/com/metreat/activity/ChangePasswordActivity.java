@@ -49,8 +49,6 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         myToolbar();// tool bar bar method
         addListener();
 
-
-        
         strUserId= SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         strTokenId= SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
     }
@@ -180,25 +178,25 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
         switch (type){
             case CHANGEPASSWORD:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if(code==200){
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
 
-                        CommonUtils.showToast(mContext,JSONUtils.getStringFromJSON(jsonObject,"message"));
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
 
-                        Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        overridePendingTransition(0, R.anim.exit_slide_right);
-                    }else {
-                        CommonUtils.showToast(mContext,JSONUtils.getStringFromJSON(jsonObject,"message"));
+                            Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            overridePendingTransition(0, R.anim.exit_slide_right);
+                        } else {
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
                 break;
         }
 

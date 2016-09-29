@@ -36,7 +36,7 @@ import java.util.Hashtable;
  */
 public class NotificationActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
 
-     Context mContext;
+    Context mContext;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     NotificationAdapter adapter;
@@ -71,14 +71,6 @@ public class NotificationActivity extends BaseActivityDrawerMenu implements View
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         adapter = new NotificationAdapter(NotificationActivity.this);
-        mRecyclerView.setAdapter(adapter);
-
-        ((NotificationAdapter) adapter).setOnItemClickListener(new NotificationAdapter.NotificationClickListner(){
-            @Override
-            public void onItemClick(int position, View v) {
-              //  Toast.makeText(mContext, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
@@ -130,34 +122,37 @@ public class NotificationActivity extends BaseActivityDrawerMenu implements View
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
         switch (type){
             case NOTIFICATION:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if (code==200){
-                        jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "notificationList");
-                        NotificationModel model;
-                        JSONObject resultObject;
-                        for (int i = 0; i < jsonArray.length(); i++){
-                            resultObject = jsonArray.getJSONObject(i);
-                            model =new NotificationModel();
-                            model.setUserEventID(JSONUtils.getStringFromJSON(resultObject,"userEventID"));
-                            model.setReceiverID(JSONUtils.getStringFromJSON(resultObject,"userID"));
-                            model.setEventType(JSONUtils.getStringFromJSON(resultObject,"eventType"));
-                            model.setEventDate(JSONUtils.getStringFromJSON(resultObject,"eventDate"));
-                            model.setName(JSONUtils.getStringFromJSON(resultObject,"name"));
-                            model.setAge(JSONUtils.getStringFromJSON(resultObject,"age"));
-                            adapter.addtoArray(model);
+                if(result!=null) {
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
+                            jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "notificationList");
+                            NotificationModel model;
+                            JSONObject resultObject;
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                resultObject = jsonArray.getJSONObject(i);
+                                model = new NotificationModel();
+                                model.setUserEventID(JSONUtils.getStringFromJSON(resultObject, "userEventID"));
+                                model.setReceiverID(JSONUtils.getStringFromJSON(resultObject, "userID"));
+                                model.setEventType(JSONUtils.getStringFromJSON(resultObject, "eventType"));
+                                model.setEventDate(JSONUtils.getStringFromJSON(resultObject, "eventDate"));
+                                model.setName(JSONUtils.getStringFromJSON(resultObject, "name"));
+                                model.setAge(JSONUtils.getStringFromJSON(resultObject, "age"));
+                                adapter.addtoArray(model);
+                            }
+                            mRecyclerView.setAdapter(adapter);
+
+                        } else {
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
                         }
-                        mRecyclerView.setAdapter(adapter);
 
-                    }else {
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else {
+                    CommonUtils.showToast(mContext,getString(R.string.dataNotFound));
                 }
                 break;
         }

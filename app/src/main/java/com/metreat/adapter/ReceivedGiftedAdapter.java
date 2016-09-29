@@ -23,8 +23,6 @@ import java.util.List;
 public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAdapter.MyViewHolder> {
     List<ReceivedGiftedModel> receivedGiftedList;
     Context mContext;
-    public static ReceivedGiftedClickListner listClickListener;
-
     public ReceivedGiftedAdapter(Context context) {
         this.mContext = context;
         receivedGiftedList = new ArrayList<>();
@@ -36,15 +34,29 @@ public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAd
                 inflate(R.layout.received_gifted_item, parent, false);
         return new MyViewHolder(itemView);
     }
+
     public void addtoArray(ReceivedGiftedModel receivedGiftedModel) {
         receivedGiftedList.add(receivedGiftedModel);
     }
 
+
+    public int getCount() {
+        return receivedGiftedList.size();
+    }
+
+    public Boolean hasArrayItems() {
+        if (receivedGiftedList.size() > 0) {
+            return true;
+
+        }
+        return false;
+    }
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ReceivedGiftedModel model=receivedGiftedList.get(position);
+        ReceivedGiftedModel model = receivedGiftedList.get(position);
         holder.tvCName.setText(model.getcName());
-        holder.tvCPrice.setText("$"+model.getcPrice());
+        holder.tvCPrice.setText("$" + model.getcPrice());
 
         //change date formate of bought date
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,7 +64,7 @@ public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAd
         try {
             Date oneWayTripDate = input.parse(model.getcBoughtDate());
             holder.tvCBoughtCoupon.setText(output.format(oneWayTripDate));
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         holder.tvReceivedFrom.setText("Received From");
@@ -64,7 +76,7 @@ public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAd
         try {
             Date oneWayTripDate = input.parse(model.getBirthDayAniv());
             holder.tvBirthAniv.setText(output.format(oneWayTripDate));
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -72,10 +84,10 @@ public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAd
 
     @Override
     public int getItemCount() {
-       return receivedGiftedList.size();
+        return receivedGiftedList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvCName;
         public TextView tvCPrice;
         public TextView tvCBoughtCoupon;
@@ -85,27 +97,12 @@ public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAd
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvCName= (TextView) itemView.findViewById(R.id.tv_CName);
-            tvCPrice= (TextView) itemView.findViewById(R.id.tv_CPrice);
-            tvCBoughtCoupon= (TextView) itemView.findViewById(R.id.tv_coupon_bought_date);
-            tvGiftedTo= (TextView) itemView.findViewById(R.id.tv_gifted_to);
-            tvBirthAniv= (TextView) itemView.findViewById(R.id.tv_birthdayAniv);
-            tvReceivedFrom= (TextView) itemView.findViewById(R.id.tv_receivedFrom);
-            itemView.setOnClickListener(this);
+            tvCName = (TextView) itemView.findViewById(R.id.tv_CName);
+            tvCPrice = (TextView) itemView.findViewById(R.id.tv_CPrice);
+            tvCBoughtCoupon = (TextView) itemView.findViewById(R.id.tv_coupon_bought_date);
+            tvGiftedTo = (TextView) itemView.findViewById(R.id.tv_gifted_to);
+            tvBirthAniv = (TextView) itemView.findViewById(R.id.tv_birthdayAniv);
+            tvReceivedFrom = (TextView) itemView.findViewById(R.id.tv_receivedFrom);
         }
-
-    @Override
-    public void onClick(View v) {
-        listClickListener.onItemClick(getPosition(), v);
     }
 }
-
-    public void setOnItemClickListener(ReceivedGiftedClickListner myClickListener) {
-        this.listClickListener = myClickListener;
-    }
-
-public interface ReceivedGiftedClickListner {
-    public void onItemClick(int position, View v);
-}
-}
-

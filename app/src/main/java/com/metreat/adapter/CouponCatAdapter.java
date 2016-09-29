@@ -60,8 +60,10 @@ public class CouponCatAdapter extends RecyclerView.Adapter<CouponCatAdapter.MyVi
             public void run() {
                 lineCount = holder.tvDescription.getLineCount();
                 if(lineCount>4){
+                    holder.tvViewMore.setText("View more");
                     holder.tvViewMore.setVisibility(View.VISIBLE);
                 }else {
+                    holder.tvViewLess.setText("View less");
                     holder.tvViewMore.setVisibility(View.INVISIBLE);
                 }
             }

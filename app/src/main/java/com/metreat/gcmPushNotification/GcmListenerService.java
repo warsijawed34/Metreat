@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.metreat.gcmPushNotisfication;
+package com.metreat.gcmPushNotification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,9 +28,6 @@ import android.support.v4.app.NotificationCompat;
 import com.metreat.R;
 import com.metreat.activity.HomeActivity;
 import com.metreat.activity.NotificationActivity;
-import com.metreat.model.syncContactsModel;
-
-import java.util.ArrayList;
 
 public class GcmListenerService extends com.google.android.gms.gcm.GcmListenerService  {
 

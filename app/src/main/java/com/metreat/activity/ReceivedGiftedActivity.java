@@ -40,13 +40,16 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
 
     Context mContext;
     RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
+    LinearLayoutManager mLayoutManager;
     ReceivedGiftedAdapter adapter;
     CallWebService webService;
     String tokenId ,userId;
     JSONArray jsonArray;
-    boolean loadingMore = true;
-    int pastVisiblesItems, visibleItemCount, totalItemCount;
+
+    int startLimit = 0;
+    int endLimit = 20, currentPosition;
+    boolean loading = true;
+    int firstVisibleItem, visibleItemCount, totalItemCount;
 
 
     @Override
@@ -59,8 +62,7 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
         myToolbar();
         tokenId= SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         userId= SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
-
-        recievedCouponApi(tokenId, userId);
+        recievedCouponApi(tokenId, userId, startLimit, endLimit);
     }
 
     @Override
@@ -76,16 +78,6 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         adapter = new ReceivedGiftedAdapter(ReceivedGiftedActivity.this);
-        mRecyclerView.setAdapter(adapter);
-
-
-        ((ReceivedGiftedAdapter) adapter).setOnItemClickListener(new ReceivedGiftedAdapter.ReceivedGiftedClickListner() {
-            @Override
-            public void onItemClick(int position, View v) {
-               // Toast.makeText(mContext, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
     @Override
@@ -119,7 +111,7 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
         }
     }
 
-    private void recievedCouponApi(String tokenId, String userId) {
+    private void recievedCouponApi(String tokenId, String userId, int startLimit, int endLimit) {
 
         try {
             if (new ConnectionDetector(mContext).isConnectingToInternet()) {
@@ -129,8 +121,8 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
                 jObject.put("tokenID", tokenId);
                 jObject.put("userId", userId);
                 jObject.put("listingType", "received");
-                jObject.put("startLimit", "0");
-                jObject.put("endLimit", "100");
+                jObject.put("startLimit", String.valueOf(startLimit));
+                jObject.put("endLimit", String.valueOf(endLimit));
                 params.put("json_data", jObject.toString());
                 System.out.println("Request: " + params);
                 webService = new CallWebService(mContext, new WebServiceApis(mContext).callApi(), params, Constants.SERVICE_TYPE.RECIEVEDCOUPON, this);
@@ -147,57 +139,63 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
         switch (type){
             case RECIEVEDCOUPON:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if(code==200){
-                        jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "couponList");
-                        ReceivedGiftedModel model;
-                        JSONObject resultObject;
-                        for (int i = 0; i < jsonArray.length(); i++){
-                            resultObject = jsonArray.getJSONObject(i);
-                            model =new ReceivedGiftedModel();
-                            model.setCouponId(JSONUtils.getStringFromJSON(resultObject,"couponId"));
-                            model.setcName(JSONUtils.getStringFromJSON(resultObject,"name"));
-                            model.setcPrice(JSONUtils.getStringFromJSON(resultObject,"price"));
-                            model.setcBoughtDate(JSONUtils.getStringFromJSON(resultObject,"boughtDate"));
-                            model.setGiftedTo(JSONUtils.getStringFromJSON(resultObject,"senderName"));
-                            model.setBirthDayAniv(JSONUtils.getStringFromJSON(resultObject,"eventDate"));
-                            adapter.addtoArray(model);
+                if(result!=null) {
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
+                            jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "couponList");
+                            ReceivedGiftedModel model;
+                            JSONObject resultObject;
 
-                        }
-                        mRecyclerView.setAdapter(adapter);
-                        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                            @Override
-                            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                            if (jsonArray.length() >= 20) {
+                                loading = false;
+                            }
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                resultObject = jsonArray.getJSONObject(i);
+                                model = new ReceivedGiftedModel();
+                                model.setCouponId(JSONUtils.getStringFromJSON(resultObject, "couponId"));
+                                model.setcName(JSONUtils.getStringFromJSON(resultObject, "name"));
+                                model.setcPrice(JSONUtils.getStringFromJSON(resultObject, "price"));
+                                model.setcBoughtDate(JSONUtils.getStringFromJSON(resultObject, "boughtDate"));
+                                model.setGiftedTo(JSONUtils.getStringFromJSON(resultObject, "senderName"));
+                                model.setBirthDayAniv(JSONUtils.getStringFromJSON(resultObject, "eventDate"));
+                                adapter.addtoArray(model);
+                            }
+                            mRecyclerView.setAdapter(adapter);
+                            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-                                if(dy > 0) //check for scroll down
-                                {
-                                    visibleItemCount = mLayoutManager.getChildCount();
+                                @Override
+                                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                                    super.onScrolled(recyclerView, dx, dy);
+
+                                    visibleItemCount = mRecyclerView.getChildCount();
                                     totalItemCount = mLayoutManager.getItemCount();
-                                 //   pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                                    firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
 
-                                    if (loadingMore)
-                                    {
-                                        if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount)
-                                        {
-                                            loadingMore = false;
-                                            Log.v("...", "Last Item Wow !");
-                                            //Do pagination.. i.e. fetch new data
-                                        }
+                                    totalItemCount = firstVisibleItem + visibleItemCount;
+
+                                    if (totalItemCount == adapter.getCount() && !loading) {
+                                        loading = true;
+                                        startLimit = endLimit;
+                                        endLimit = endLimit + 20;
+                                        currentPosition = firstVisibleItem;
+                                        recievedCouponApi(tokenId, userId, startLimit, endLimit);
                                     }
                                 }
-                            }
-                        });
+                            });
 
-                    }else {
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                        } else {
+                            if (!adapter.hasArrayItems())
+                                CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                        }
 
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else {
+                    CommonUtils.showToast(mContext,getString(R.string.dataNotFound));
                 }
                 break;
         }
@@ -215,6 +213,4 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
             overridePendingTransition(0, R.anim.exit_slide_left);
         }
     }
-
-
 }

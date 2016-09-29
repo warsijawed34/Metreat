@@ -394,81 +394,89 @@ public class UpdateProfile extends BaseActivityDrawerMenu implements View.OnClic
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
         switch (type){
             case UPDATEPROFILE:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if(code==200){
-                        JSONObject userData = JSONUtils.getJSONObjectFromJSON(jsonObject, "data");
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.USERID, JSONUtils.getStringFromJSON(userData, "userID"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.USERNAME, JSONUtils.getStringFromJSON(userData, "name"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.EMAILID, JSONUtils.getStringFromJSON(userData, "email"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.DOB, JSONUtils.getStringFromJSON(userData, "dob"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.IMAGES, JSONUtils.getStringFromJSON(userData, "image"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESS, JSONUtils.getStringFromJSON(userData, "address"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.TOKENID, JSONUtils.getStringFromJSON(userData, "tokenID"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.MOBILENUMBER, JSONUtils.getStringFromJSON(userData, "mobileNumber"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                if(result!=null) {
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
+                            JSONObject userData = JSONUtils.getJSONObjectFromJSON(jsonObject, "data");
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.USERID, JSONUtils.getStringFromJSON(userData, "userID"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.USERNAME, JSONUtils.getStringFromJSON(userData, "name"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.EMAILID, JSONUtils.getStringFromJSON(userData, "email"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.DOB, JSONUtils.getStringFromJSON(userData, "dob"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.IMAGES, JSONUtils.getStringFromJSON(userData, "image"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESS, JSONUtils.getStringFromJSON(userData, "address"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.TOKENID, JSONUtils.getStringFromJSON(userData, "tokenID"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.MOBILENUMBER, JSONUtils.getStringFromJSON(userData, "mobileNumber"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
 
-                        JSONObject addressObject = JSONUtils.getJSONObjectFromJSON(userData, "addressParts");
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESSLINE1, JSONUtils.getStringFromJSON(addressObject, "addressLine1"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESSLINE2, JSONUtils.getStringFromJSON(addressObject, "addressLine2"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.CITY, JSONUtils.getStringFromJSON(addressObject, "city"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.POSTALCODE, JSONUtils.getStringFromJSON(addressObject, "postalcode"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.STATE, JSONUtils.getStringFromJSON(addressObject, "state"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                        SharedPreferencesManger.setPrefValue(mContext, Constants.COUNTRY, JSONUtils.getStringFromJSON(addressObject, "country"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            JSONObject addressObject = JSONUtils.getJSONObjectFromJSON(userData, "addressParts");
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESSLINE1, JSONUtils.getStringFromJSON(addressObject, "addressLine1"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESSLINE2, JSONUtils.getStringFromJSON(addressObject, "addressLine2"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.CITY, JSONUtils.getStringFromJSON(addressObject, "city"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.POSTALCODE, JSONUtils.getStringFromJSON(addressObject, "postalcode"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.STATE, JSONUtils.getStringFromJSON(addressObject, "state"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            SharedPreferencesManger.setPrefValue(mContext, Constants.COUNTRY, JSONUtils.getStringFromJSON(addressObject, "country"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
 
 
-                        JSONArray eventArray = JSONUtils.getJSONArrayFromJSON(userData, "event");
-                        for (int i = 0; i < eventArray.length(); i++){
-                         JSONObject eventObject = eventArray.getJSONObject(i);
-                            // eventId=JSONUtils.getStringFromJSON(eventObject,"id");
-                            SharedPreferencesManger.setPrefValue(mContext, Constants.EVENTID, JSONUtils.getStringFromJSON(eventObject, "id"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                            SharedPreferencesManger.setPrefValue(mContext, Constants.EVENTTYPE, JSONUtils.getStringFromJSON(eventObject, "eventType"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-                            SharedPreferencesManger.setPrefValue(mContext, Constants.EVENTDATE, JSONUtils.getStringFromJSON(eventObject, "eventDate"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            JSONArray eventArray = JSONUtils.getJSONArrayFromJSON(userData, "event");
+                            for (int i = 0; i < eventArray.length(); i++) {
+                                JSONObject eventObject = eventArray.getJSONObject(i);
+                                // eventId=JSONUtils.getStringFromJSON(eventObject,"id");
+                                SharedPreferencesManger.setPrefValue(mContext, Constants.EVENTID, JSONUtils.getStringFromJSON(eventObject, "id"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                                SharedPreferencesManger.setPrefValue(mContext, Constants.EVENTTYPE, JSONUtils.getStringFromJSON(eventObject, "eventType"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                                SharedPreferencesManger.setPrefValue(mContext, Constants.EVENTDATE, JSONUtils.getStringFromJSON(eventObject, "eventDate"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
+                            }
+
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+
+                            Intent intent = new Intent(UpdateProfile.this, MyProfileActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            overridePendingTransition(0, R.anim.exit_slide_right);
+
+                        } else {
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
                         }
 
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
-
-                        Intent intent = new Intent(UpdateProfile.this, MyProfileActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        overridePendingTransition(0, R.anim.exit_slide_right);
-
-                    }else {
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else {
+                    CommonUtils.showToast(mContext,getString(R.string.dataNotFound));
                 }
                 break;
             case EVENTTYPELIST:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if(code==200){
-                        JSONArray jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "eventTypeList");
-                        JSONObject eventListObject;
-                        EventTypeListModel model;
+                if(result!=null) {
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
+                            JSONArray jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "eventTypeList");
+                            JSONObject eventListObject;
+                            EventTypeListModel model;
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            eventListObject = jsonArray.getJSONObject(i);
-                            model = new EventTypeListModel();
-                            model.setId(JSONUtils.getStringFromJSON(eventListObject, "id"));
-                            model.setTittle(JSONUtils.getStringFromJSON(eventListObject, "title"));
-                            eventTypeListAdapter.addToArrayList(model);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                eventListObject = jsonArray.getJSONObject(i);
+                                model = new EventTypeListModel();
+                                model.setId(JSONUtils.getStringFromJSON(eventListObject, "id"));
+                                model.setTittle(JSONUtils.getStringFromJSON(eventListObject, "title"));
+                                eventTypeListAdapter.addToArrayList(model);
+                            }
+                            eventPopupWindow.setAdapter(eventTypeListAdapter);
+                            eventTypeListAdapter.notifyDataSetChanged();
+
+                        } else {
+                            CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+
                         }
-                        eventPopupWindow.setAdapter(eventTypeListAdapter);
-                        eventTypeListAdapter.notifyDataSetChanged();
 
-                    }else {
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else {
+                    CommonUtils.showToast(mContext,getString(R.string.dataNotFound));
                 }
                 break;
         }

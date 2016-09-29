@@ -34,11 +34,16 @@ import java.util.Hashtable;
 public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
     Context mContext;
     RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
+    LinearLayoutManager mLayoutManager;
     BuyCouponAdapter adapter;
     CallWebService webService;
     String tokenId,catId ,receiverId;
     JSONArray jsonArray;
+
+    int startLimit = 0;
+    int endLimit = 20, currentPosition;
+    boolean loading = true;
+    int firstVisibleItem, visibleItemCount, totalItemCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,7 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
         Intent intent = getIntent();
         catId = intent.getStringExtra("catId");
         receiverId = intent.getStringExtra("recieverId");
-         couponListApi(tokenId, catId);
+         couponListApi(tokenId, catId, startLimit, endLimit);
     }
 
 
@@ -68,16 +73,6 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         adapter = new BuyCouponAdapter(BuyCouponActivity.this);
-        mRecyclerView.setAdapter(adapter);
-
-        ((BuyCouponAdapter) adapter).setOnItemClickListener(new BuyCouponAdapter.BuyCouponClickListner() {
-            @Override
-            public void onItemClick(int position, View v) {
-
-            }
-        });
-
-
     }
 
     @Override
@@ -112,7 +107,7 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
                 break;
         }
     }
-    private void couponListApi(String tokenId ,String catId) {
+    private void couponListApi(String tokenId ,String catId, int startLimit, int endLimit) {
         try {
             if (new ConnectionDetector(mContext).isConnectingToInternet()) {
                 Hashtable<String, String> params = new Hashtable<>();
@@ -120,8 +115,8 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
                 jObject.put("method", "couponList");
                 jObject.put("tokenID", tokenId);
                 jObject.put("catId", catId);
-                jObject.put("startLimit", "0");
-                jObject.put("endLimit", "100");
+                jObject.put("startLimit", String.valueOf(startLimit));
+                jObject.put("endLimit", String.valueOf(endLimit));
                 params.put("json_data", jObject.toString());
                 System.out.println("Request: " + params);
                 webService = new CallWebService(mContext, new WebServiceApis(mContext).callApi(), params, Constants.SERVICE_TYPE.COUPONLIST, this);
@@ -138,34 +133,64 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
         switch (type){
             case COUPONLIST:
-                try {
-                    System.out.println("Result: " + result);
-                    JSONObject jsonObject = new JSONObject(result);
-                    int code = JSONUtils.getIntFromJSON(jsonObject, "code");
-                    if(code==200){
-                        jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "couponList");
-                        BuyCouponModel model;
-                        JSONObject resultObject;
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            resultObject = jsonArray.getJSONObject(i);
-                            model = new BuyCouponModel();
-                            model.setCouponId(JSONUtils.getStringFromJSON(resultObject, "couponId"));
-                            model.setName(JSONUtils.getStringFromJSON(resultObject,"name"));
-                            model.setImage(JSONUtils.getStringFromJSON(resultObject,"image"));
-                            model.setDescription(JSONUtils.getStringFromJSON(resultObject,"description"));
-                            model.setAmount(JSONUtils.getStringFromJSON(resultObject,"amount"));
-                            model.setRecieverId(receiverId);
-                            adapter.addToArray(model);
+                if(result!=null) {
+                    try {
+                        System.out.println("Result: " + result);
+                        JSONObject jsonObject = new JSONObject(result);
+                        int code = JSONUtils.getIntFromJSON(jsonObject, "code");
+                        if (code == 200) {
+                            jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "couponList");
+                            BuyCouponModel model;
+                            JSONObject resultObject;
+                            if (jsonArray.length() >= 20) {
+                                loading = false;
+                            }
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                resultObject = jsonArray.getJSONObject(i);
+                                model = new BuyCouponModel();
+                                model.setCouponId(JSONUtils.getStringFromJSON(resultObject, "couponId"));
+                                model.setName(JSONUtils.getStringFromJSON(resultObject, "name"));
+                                model.setImage(JSONUtils.getStringFromJSON(resultObject, "image"));
+                                model.setDescription(JSONUtils.getStringFromJSON(resultObject, "description"));
+                                model.setAmount(JSONUtils.getStringFromJSON(resultObject, "amount"));
+                                model.setRecieverId(receiverId);
+                                adapter.addToArray(model);
                             }
                             mRecyclerView.setAdapter(adapter);
+                            mRecyclerView.getLayoutManager().scrollToPosition(currentPosition);
+                            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-                           }else {
-                        CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                                @Override
+                                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                                    super.onScrolled(recyclerView, dx, dy);
 
+                                    visibleItemCount = mRecyclerView.getChildCount();
+                                    totalItemCount = mLayoutManager.getItemCount();
+                                    firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
+
+                                    totalItemCount = firstVisibleItem + visibleItemCount;
+
+                                    if (totalItemCount == adapter.getCount() && !loading) {
+                                        loading = true;
+                                        startLimit = endLimit;
+                                        endLimit = endLimit + 20;
+                                        currentPosition = firstVisibleItem;
+                                        couponListApi(tokenId, catId, startLimit, endLimit);
+                                    }
+                                }
+                            });
+
+
+                        } else {
+                            if (!adapter.hasArrayItems())
+                                CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else {
+                    CommonUtils.showToast(mContext,getString(R.string.dataNotFound));
                 }
                 break;
         }
