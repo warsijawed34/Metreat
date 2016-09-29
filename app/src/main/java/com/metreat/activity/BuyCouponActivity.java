@@ -59,6 +59,8 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
         catId = intent.getStringExtra("catId");
         receiverId = intent.getStringExtra("recieverId");
          couponListApi(tokenId, catId, startLimit, endLimit);
+        ///cnages some here
+        
     }
 
 
