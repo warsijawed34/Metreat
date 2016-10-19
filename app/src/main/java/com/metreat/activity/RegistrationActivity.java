@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.Html;
 import android.text.InputType;
+import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ import java.util.Date;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 3/8/16.
+ * Registration Activity
  */
 public class RegistrationActivity extends BaseActivity implements View.OnClickListener, OnWebServiceResult {
 
@@ -92,15 +93,17 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         itemClickListner();
 
-        if (showAgeCheckBox.isChecked()) {
+        if (showAgeCheckBox.isChecked()) {//show age
             strYesNo = "yes";
 
         } else {
             strYesNo = "no";
         }
+       // Spannable text here..
         tvTermsConditions.setMovementMethod(LinkMovementMethod.getInstance());
         String text = "Please agree with<a href='http://i.vinove.com/a_me-treat/backend/web/site/terms-and-conditions'> Terms &amp; Conditions</a>";
         tvTermsConditions.setText(Html.fromHtml(text));
+
     }
 
 
@@ -116,7 +119,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         termsCheckBox = (CheckBox) findViewById(R.id.cbTerms);
         showAgeCheckBox = (CheckBox) findViewById(R.id.cbaddAge);
         showPassword = (ImageView) findViewById(R.id.ivShowPassword);
-      //  rlDob = (RelativeLayout) findViewById(R.id.rlDob);
         login = (Button) findViewById(R.id.bLoginReg);
         register = (Button) findViewById(R.id.bRegistration);
         ivIconLeft = (ImageView) findViewById(R.id.ivIconLeft);
@@ -133,7 +135,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         linearLayoutEvent = (LinearLayout) findViewById(R.id.relativeLayout);
 
 
-        //add view here...
+        //add view here...(only one view add here..)
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewAdd = mInflater.inflate(R.layout.event_layout, null);
         llOccasion = (LinearLayout) viewAdd.findViewById(R.id.llOccasion);
@@ -145,7 +147,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         linearLayoutEvent.addView(viewAdd);
 
     }
-
+//click method for Occasion EditText
   private void ViewClickListner() {
       edOccasion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +169,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void addListener() {
         showPassword.setOnClickListener(this);
-        //rlDob.setOnClickListener(this);
         login.setOnClickListener(this);
         register.setOnClickListener(this);
         dob.setOnClickListener(this);
@@ -180,9 +181,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
     }
 
-
+//item click listner for eventPopupWindow
     public void itemClickListner() {
-
         eventPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -222,34 +222,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     }
                 }
                 break;
-      /*      case R.id.rlDob:
-                dateFormat = "1";
-                dateOfBirth();
-                break;*/
             case R.id.edDob:
                 dateFormat = "1";
                 dateOfBirth();
-                break;
- /*           case R.id.rlOccasion:
-                eventPopupWindow.setAnchorView(edOccasion);
-                eventPopupWindow.setModal(true);
-                eventPopupWindow.show();
-                break;
-            case R.id.rlOccasionDate:
-                dateFormat = "2";
-                dateOfEvent();
-                break;*/
-            case R.id.iv_addEvent:
-           /*     if (counter <eventTypeListAdapter.getCount()) {
-                    viewAdd = mInflater.inflate(R.layout.event_layout, null);
-                    rlOccasion = (RelativeLayout) viewAdd.findViewById(R.id.rlOccasion);
-                    rlOccasionDate = (RelativeLayout) viewAdd.findViewById(R.id.rlOccasionDate);
-                    linearLayoutEvent.addView(viewAdd);
-                    counter++;
-                }*/
-
-             /*  String date= edOccasionDate.getText().toString();
-                CommonUtils.showToast(mContext,date);*/
                 break;
             case R.id.bLoginReg:
                 intent = new Intent(mContext, LoginActivity.class);
@@ -316,6 +291,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
     private void registrationApi(String strYesNo, String listId, String socialId, String deviceToken) {
 
+        //change date formate
         SimpleDateFormat input = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -325,7 +301,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
             e.printStackTrace();
         }
 
-
+     //change date formate
         SimpleDateFormat input1 = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat output1 = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -381,7 +357,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     public void onWebServiceResult(String result, Constants.SERVICE_TYPE type) {
 
         switch (type) {
-            case REGISTRATION:
+            case REGISTRATION:// registration result
                 try {
                     System.out.println("Result: " + result);
                     JSONObject jsonObject = new JSONObject(result);
@@ -404,7 +380,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     e.printStackTrace();
                 }
                 break;
-            case EVENTTYPELIST:
+            case EVENTTYPELIST: //Event list result
                 try {
                     System.out.println("Result: " + result);
                     JSONObject jsonObject = new JSONObject(result);
@@ -479,22 +455,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         dobDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
         dobDatePicker.show();
     }
-
-    private void dateOfEvent() {
-        dobDatePicker = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                    strEvent = dateFormatResultOccasion.format(newDate.getTime());
-                    edOccasionDate.setText(strEvent);
-            }
-        },
-                newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        dobDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
-        dobDatePicker.show();
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -502,7 +462,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         overridePendingTransition(0, R.anim.exit_slide_left);
     }
 
-
+     //validation method
     private boolean validateSignUpForm() {
         if (username.getText().toString().trim().isEmpty()) {
             CommonUtils.showToast(mContext, getResources().getString(R.string.userValidation));
@@ -545,17 +505,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
             return false;
         }
 
-      /*  if (edOccasion.getText().toString().trim().isEmpty()) {
-            CommonUtils.showToast(mContext, getResources().getString(R.string.otherEventsValidation));
-            return false;
-        }
-
-
-        if (edOccasionDate.getText().toString().trim().isEmpty()) {
-            CommonUtils.showToast(mContext, getResources().getString(R.string.eventsDateValidation));
-            return false;
-        }*/
-
         if (showAddressCheckBox.isChecked()) {
 
             if (edLocationAdd1.getText().toString().trim().isEmpty()) {
@@ -579,8 +528,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                 return false;
             }
         }
-
-
 
         if (termsCheckBox.isChecked() != true) {
             CommonUtils.showToast(mContext, mContext.getResources().getString(R.string.checkbox_msg_validation));

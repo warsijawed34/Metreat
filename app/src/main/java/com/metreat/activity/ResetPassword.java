@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 31/8/16.
+ * Reset password
  */
 public class ResetPassword extends BaseActivity implements View.OnClickListener, OnWebServiceResult {
 
@@ -35,7 +35,7 @@ public class ResetPassword extends BaseActivity implements View.OnClickListener,
     Button resetPasswordSubmit;
     boolean showPwd;
     Context mContext;
-    private TextView titleName;
+    TextView titleName;
     CallWebService webService;
     String emailId;
 
@@ -97,7 +97,6 @@ public class ResetPassword extends BaseActivity implements View.OnClickListener,
                     resetPasswordApi(emailId);
                 }
                 break;
-
             case R.id.ivResetNewShow:
                 if(edResetNewPassword.getText().toString().length() > 0) {
                     if (!showPwd) {
@@ -111,7 +110,6 @@ public class ResetPassword extends BaseActivity implements View.OnClickListener,
                     }
                 }
                 break;
-
             case R.id.ivResetConfirmShow:
                 if(edResetConfirmPassword.getText().toString().length() > 0) {
                     if (!showPwd) {
@@ -176,7 +174,7 @@ public class ResetPassword extends BaseActivity implements View.OnClickListener,
                 break;
         }
     }
-
+  //validation method
     public boolean validateForm() {
 
         if (edResetNewPassword.getText().toString().isEmpty() || edResetNewPassword.length() < 6 || edResetNewPassword.length() > 15) {

@@ -34,7 +34,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * Created by Jawed on 8/8/16.
+ * Received Gift in this Activity
  */
 public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
 
@@ -164,6 +164,7 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
                                 adapter.addtoArray(model);
                             }
                             mRecyclerView.setAdapter(adapter);
+                            //pagination with recyclerView
                             mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
                                 @Override
@@ -187,7 +188,7 @@ public class ReceivedGiftedActivity extends BaseActivityDrawerMenu implements Vi
                             });
 
                         } else {
-                            if (!adapter.hasArrayItems())
+                            if (!adapter.hasArrayItems())//check array size here...
                                 CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
                         }
 

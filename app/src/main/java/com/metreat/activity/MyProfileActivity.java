@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Jawed on 5/8/16.
+ * UserProfile activity
  */
 public class MyProfileActivity extends BaseActivityDrawerMenu implements View.OnClickListener {
     Context  mContext;

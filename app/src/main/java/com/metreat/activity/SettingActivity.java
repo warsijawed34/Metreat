@@ -27,15 +27,13 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by Jawed on 5/8/16.
+ * Setting activity
  */
 public class SettingActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
     Context mContext;
     FrameLayout flMyProfile,flNotification,flChangePass;
     ToggleButton toggleBtnNotification;
-    boolean tb,isCheckedToggle;
-    SharedPreferencesManger sharedPreferencesManger;
-    String strYesNo, tokenId, userId;
+    String strYesNo, tokenId, userId, yesNOStr;
     CallWebService webService;
 
     @Override
@@ -46,16 +44,12 @@ public class SettingActivity extends BaseActivityDrawerMenu implements View.OnCl
         initView();
         addListener();
         myToolbar();
+        yesNOStr = SharedPreferencesManger.getPrefValue(mContext, Constants.NOTIFICATION_YESNO, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
 
-        isCheckedToggle = (boolean) sharedPreferencesManger.getPrefValue(mContext, Constants.TOGGLEBUTTON, SharedPreferencesManger.PREF_DATA_TYPE.BOOLEAN);
-        if(isCheckedToggle==true){
+        if(yesNOStr.equals("yes")){//check notification are ON and OFF
             toggleBtnNotification.setBackgroundResource(R.drawable.on_button);
-            strYesNo = "yes";
-
         }else {
             toggleBtnNotification.setBackgroundResource(R.drawable.off_button);
-            strYesNo = "no";
-
         }
         tokenId= SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         userId= SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
@@ -117,23 +111,19 @@ public class SettingActivity extends BaseActivityDrawerMenu implements View.OnCl
                 intent=new Intent(mContext,NotificationActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, R.anim.exit_slide_right);
-
                 break;
 
             case R.id.tb_notification:
                 if(toggleBtnNotification.isChecked()){
-                    tb = toggleBtnNotification.isChecked();
                     toggleBtnNotification.setBackgroundResource(R.drawable.on_button);
-                    SharedPreferencesManger.setPrefValue(mContext, Constants.TOGGLEBUTTON, tb, SharedPreferencesManger.PREF_DATA_TYPE.BOOLEAN);
-                    strYesNo = "yes";
+                    strYesNo="yes";
+                    SharedPreferencesManger.setPrefValue(mContext, Constants.NOTIFICATION_YESNO, strYesNo, SharedPreferencesManger.PREF_DATA_TYPE.STRING);
                     settingApi(tokenId,userId,strYesNo);
 
-                }
-                else {
-                    tb=false;
+                }else {
                     toggleBtnNotification.setBackgroundResource(R.drawable.off_button);
-                    SharedPreferencesManger.setPrefValue(mContext, Constants.TOGGLEBUTTON, tb, SharedPreferencesManger.PREF_DATA_TYPE.BOOLEAN);
-                    strYesNo = "no";
+                    strYesNo="no";
+                    SharedPreferencesManger.setPrefValue(mContext, Constants.NOTIFICATION_YESNO, strYesNo, SharedPreferencesManger.PREF_DATA_TYPE.STRING);
                     settingApi(tokenId,userId,strYesNo);
                 }
                 break;
@@ -175,10 +165,7 @@ public class SettingActivity extends BaseActivityDrawerMenu implements View.OnCl
                     JSONObject jsonObject = new JSONObject(result);
                     int code = JSONUtils.getIntFromJSON(jsonObject, "code");
                     if (code==200){
-                      //  CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
-
                     }else {
-                       // CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
                     }
                 }
                 catch (Exception e){

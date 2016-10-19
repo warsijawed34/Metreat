@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 2/8/16.
+ * ChangePassword Activity
  */
 public class ChangePasswordActivity extends BaseActivity implements View.OnClickListener, OnWebServiceResult {
 
@@ -36,7 +36,6 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
     private Button submit;
     private Context mContext;
     boolean showPwd;
-    private Toolbar toolbar;
     CallWebService webService;
     String strUserId, strTokenId;
 
@@ -46,7 +45,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.change_password);
         mContext = ChangePasswordActivity.this;
         initView();
-        myToolbar();// tool bar bar method
+        myToolbar();
         addListener();
 
         strUserId= SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
@@ -120,7 +119,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                         showPwd = false;
                         newPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         newPass.setSelection(newPass.getText().length());
-                      //  newPassImage.setImageResource(R.drawable.show_password);
+                      //  newPassImage.setImageResource(R.drawable.show_password);//change image here..
                     }
                 }
                 break;
@@ -209,7 +208,7 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
         overridePendingTransition(0, R.anim.exit_slide_left);
     }
 
-
+          //validation method
         public boolean validateForm() {
 
         if (oldPass.getText().toString().isEmpty() || oldPass.length() < 6 || oldPass.length() > 15) {

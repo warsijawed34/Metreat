@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 4/8/16.
+ * OTP Activity
  */
 public class OtpActivity extends BaseActivity implements View.OnClickListener, OnWebServiceResult {
 

@@ -32,7 +32,7 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 5/8/16.
+ * show Notification list in this activity
  */
 public class NotificationActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
 

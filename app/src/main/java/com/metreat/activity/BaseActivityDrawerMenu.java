@@ -35,7 +35,7 @@ import java.util.Hashtable;
 import java.util.Locale;
 
 /**
- * Created by vinove on 2/8/16.
+ * This is BaseActivity for DrawerMenu
  */
 public class BaseActivityDrawerMenu extends AppCompatActivity implements OnWebServiceResult {
 
@@ -144,16 +144,15 @@ public class BaseActivityDrawerMenu extends AppCompatActivity implements OnWebSe
                         overridePendingTransition(0, R.anim.exit_slide_right);
                         break;
                     case 6:
+                        logoutApi(userId, tokenId); //send userID for close notification after logout
                         SharedPreferencesManger.removeAllPrefValue(mContext);
                         intent = new Intent(mContext, LoginActivity.class);
                         intent.setAction(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
-                        logoutApi(userId, tokenId);
                         break;
                     default:
                         break;

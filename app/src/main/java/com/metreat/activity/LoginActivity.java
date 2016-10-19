@@ -62,7 +62,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView forgetPassword;
     boolean showPwd;
     private Context mContext;
-    private LoginButton loginButton;
     private CallbackManager callbackManager;
     boolean doubleBackToExitPressedOnce = false;
     CallWebService webService;
@@ -82,7 +81,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getfaceBookShaKey();
+       // getfaceBookShaKey();
+        //using facebook login
         FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
 
@@ -221,7 +221,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         SharedPreferencesManger.setPrefValue(mContext, Constants.DOB, JSONUtils.getStringFromJSON(userData, "dob"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
                         SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESS, JSONUtils.getStringFromJSON(userData, "address"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
                         SharedPreferencesManger.setPrefValue(mContext, Constants.TOKENID, JSONUtils.getStringFromJSON(userData, "tokenID"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
-
+                        SharedPreferencesManger.setPrefValue(mContext, Constants.NOTIFICATION_YESNO, JSONUtils.getStringFromJSON(userData, "notification"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
                         JSONObject addressObject = JSONUtils.getJSONObjectFromJSON(userData, "addressParts");
                         SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESSLINE1, JSONUtils.getStringFromJSON(addressObject, "addressLine1"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
                         SharedPreferencesManger.setPrefValue(mContext, Constants.ADDRESSLINE2, JSONUtils.getStringFromJSON(addressObject, "addressLine2"), SharedPreferencesManger.PREF_DATA_TYPE.STRING);
@@ -265,15 +265,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
 
     }
-
+//login facebook method
     private void loginWithFacebook() {
         LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends","email"));
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             public void onSuccess(LoginResult result) {
                 Log.d("Error",result.toString());
-
-           // Toast.makeText(mContext, "login successfully", Toast.LENGTH_LONG).show();
                 GraphRequest request = GraphRequest.newMeRequest(
                         result.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
@@ -282,21 +280,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                 System.out.println("Result: " + response);
                                 JSONObject res = response.getJSONObject();
                                 try {
+                                    //get all result here....
                                      socialEmailId = res.getString("email");
                                      socialFirstName = res.getString("first_name");
                                      socialLastName = res.getString("last_name");
                                      socialId = res.getString("id");
                                      socialName=res.getString("name");
-                                //   SocialBirthday=res.getString("birthday");
                                      socilaType = "facebook";
-                              //   CommonUtils.showToast(mContext,SocialBirthday);
                                     loginApi(socilaType, deviceToken, socialId);
-
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                // Application code
                             }
                         });
                 Bundle parameters = new Bundle();
@@ -319,7 +314,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         });
     }
 
-
+//validation method
     public boolean validateLoginForm() {
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
@@ -335,17 +330,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             return false;
         }
 
-       /* if (password.getText().toString().isEmpty() || password.length() < 6 || password.length() > 15) {
-            if (password.getText().toString().isEmpty()) {
-                CommonUtils.showToast(mContext, getString(R.string.password_validation));
-                return false;
-            }
-            CommonUtils.showToast(mContext, getString(R.string.validate_password));
-            return false;
-        }*/
         return true;
     }
-
+//double BackPressed to exits
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
@@ -361,7 +348,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             }
         }, 2000);
     }
-
+//get SHA key from this method
     private void getfaceBookShaKey() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -381,13 +368,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        //for fb
+        // for facebook result
         try {
             callbackManager.onActivityResult(requestCode, responseCode, intent);
             if (requestCode == HOME_ACTIVITIES_REQUEST_CODE) {
-       /*         Intent intent1=new Intent(mContext,HomeActivity.class);
-                startActivity(intent1);
-                finish();*/
             }
         } catch (Exception e) {
 

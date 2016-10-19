@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by vinove on 8/8/16.
+ * BaseActivity without drawerMenu
  */
 public class BaseActivity extends AppCompatActivity {
 

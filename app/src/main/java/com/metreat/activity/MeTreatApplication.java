@@ -13,7 +13,7 @@ import static android.os.Build.VERSION;
 import static android.os.Build.VERSION_CODES;
 
 /**
- * Created by vinove on 1/7/16.
+ * Application class for loading images
  */
 public class MeTreatApplication extends Application {
 

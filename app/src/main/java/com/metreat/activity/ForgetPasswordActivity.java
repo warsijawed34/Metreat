@@ -26,13 +26,12 @@ import java.lang.reflect.Type;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 2/8/16.
+ * forget password activity
  */
 public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener, OnWebServiceResult {
 
     private EditText email;
     private Button submit;
-    private Toolbar toolbar;
     private TextView titleName;
     private Context mContext;
     CallWebService webService;
@@ -151,7 +150,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         finish();
         overridePendingTransition(0, R.anim.exit_slide_left);
     }
-
+//validation method
     public boolean validateLoginForm() {
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {

@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by vinove on 9/8/16.
+ *
  */
 public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
     Context mContext;
@@ -59,7 +59,6 @@ public class BuyCouponActivity extends BaseActivityDrawerMenu implements View.On
         catId = intent.getStringExtra("catId");
         receiverId = intent.getStringExtra("recieverId");
          couponListApi(tokenId, catId, startLimit, endLimit);
-        ///cnages some here
         
     }
 

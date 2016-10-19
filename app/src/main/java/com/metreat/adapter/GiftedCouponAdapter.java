@@ -42,11 +42,6 @@ public class GiftedCouponAdapter extends RecyclerView.Adapter<GiftedCouponAdapte
         giftedCouponList.add(giftedCouponsModel);
     }
 
-
-    public int getCount() {
-        return giftedCouponList.size();
-    }
-
     public Boolean hasArrayItems() {
         if (giftedCouponList.size() > 0) {
             return true;

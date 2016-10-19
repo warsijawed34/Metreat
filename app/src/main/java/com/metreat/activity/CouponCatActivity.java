@@ -31,7 +31,7 @@ import java.util.Hashtable;
 
 
 /**
- * Created by vinove on 23/8/16.
+ * Coupon categories activity(getting coupon in categories wise )
  */
 public class CouponCatActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
     Context mContext;
@@ -41,6 +41,7 @@ public class CouponCatActivity extends BaseActivityDrawerMenu implements View.On
     CallWebService webService;
     String tokenId, receiverId;
     JSONArray jsonArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

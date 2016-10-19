@@ -27,21 +27,19 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by Jawed on 8/8/16.
+ * show Gifted coupon in this activity(used RecyclerView)
  */
 public class GiftedCouponActivity extends BaseActivityDrawerMenu implements View.OnClickListener, OnWebServiceResult {
 
     Context mContext;
     RecyclerView mRecyclerView;
-   // RecyclerView.LayoutManager mLayoutManager;
     LinearLayoutManager mLayoutManager;
     GiftedCouponAdapter adapter;
     String tokenId ,userId;
     CallWebService webService;
     JSONArray jsonArray;
-
      int startLimit = 0;
-     int endLimit = 20, currentPosition;
+     int endLimit = 10, currentPosition;
      boolean loading = true;
      int firstVisibleItem, visibleItemCount, totalItemCount;
 
@@ -75,8 +73,6 @@ public class GiftedCouponActivity extends BaseActivityDrawerMenu implements View
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         adapter = new GiftedCouponAdapter(GiftedCouponActivity.this);
-
-
 
     }
 
@@ -146,7 +142,7 @@ public class GiftedCouponActivity extends BaseActivityDrawerMenu implements View
                         int code = JSONUtils.getIntFromJSON(jsonObject, "code");
                         if (code == 200) {
                             jsonArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "couponList");
-                            if (jsonArray.length() >= 20) {
+                            if (jsonArray.length() >= 10) {
                                 loading = false;
                             }
                             GiftedCouponsModel model;
@@ -163,6 +159,7 @@ public class GiftedCouponActivity extends BaseActivityDrawerMenu implements View
                                 adapter.addtoArray(model);
                             }
                             mRecyclerView.setAdapter(adapter);
+                            //Pagination with RecyclerView
                             mRecyclerView.getLayoutManager().scrollToPosition(currentPosition);
                             mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -176,18 +173,18 @@ public class GiftedCouponActivity extends BaseActivityDrawerMenu implements View
 
                                     totalItemCount = firstVisibleItem + visibleItemCount;
 
-                                    if (totalItemCount == adapter.getCount() && !loading) {
+                                    if (totalItemCount == adapter.getItemCount() && !loading) {
                                         loading = true;
                                         startLimit = endLimit;
-                                        endLimit = endLimit + 20;
+                                        endLimit = endLimit + 10;
                                         currentPosition = firstVisibleItem;
-                                        giftedCouponApi(tokenId, userId, startLimit, endLimit);
+                                        giftedCouponApi(tokenId, userId, startLimit, endLimit);// fetch new data
                                     }
                                 }
                             });
 
                         } else {
-                            if (!adapter.hasArrayItems())
+                            if (!adapter.hasArrayItems())//check array size after scroll
                                 CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
                         }
 
@@ -201,10 +198,10 @@ public class GiftedCouponActivity extends BaseActivityDrawerMenu implements View
         }
 
     }
-
     @Override
     public void onBackPressed() {
-        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {//check drawerOpen
             mDrawer.closeDrawer(Gravity.LEFT);
 
         } else {

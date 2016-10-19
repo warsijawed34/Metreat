@@ -11,7 +11,7 @@ import com.metreat.pereferences.SharedPreferencesManger;
 import com.metreat.utils.Constants;
 
 /**
- * Created by vinove on 2/8/16.
+ * Splash Activity for 3 seconds
  */
 public class SplashActivity extends AppCompatActivity{
 
@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(userId.isEmpty()) {
+                if(userId.isEmpty()) {//check userID
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     startActivity(intent);
                     finish();

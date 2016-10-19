@@ -34,6 +34,7 @@ public final class Constants {
     public static final String COUNTRY = "country";
     public static final String MOBILENUMBER = "mobileNumber";
     public static final String TOKENID = "tokenId";
+    public static final String NOTIFICATION_YESNO = "yesNo";
     public static final String DOB = "dateOfBirth";
     public static final String EVENT = "EVENT";
     public static final String DEVICETOKEN = "devicetoken";

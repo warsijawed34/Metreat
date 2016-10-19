@@ -42,13 +42,13 @@ import java.util.Hashtable;
 import java.util.Set;
 
 /**
- * Created by vinove on 4/1/16.
+ * PaypalActivity for payment
  */
 public class PaypalActivity extends Activity implements OnWebServiceResult {
     private static final String TAG = "PayPalPaymentActivity";
     Context mContext;
     CallWebService webService;
-    String tokenId, userId, amount, couponId, transactionId, receiverID;
+    String tokenId, userId, couponAmount, couponId, transactionId, receiverID;
     /**
      * - Set to PayPalConfiguration.ENVIRONMENT_PRODUCTION to move real money.
      * <p/>
@@ -83,19 +83,20 @@ public class PaypalActivity extends Activity implements OnWebServiceResult {
         tokenId= SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         userId= SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         Intent intent1=getIntent();
-        amount = intent1.getStringExtra("amount");
+        couponAmount = intent1.getStringExtra("amount");
         couponId = intent1.getStringExtra("couponId");
         receiverID = intent1.getStringExtra("receiverID");
+        if(couponAmount.equals("0.00")){
+            transactionId="NA-0000";
+            checkOutApi(tokenId, userId, couponId, couponAmount, transactionId,receiverID);
+        }else {
+            Intent intent = new Intent(this, PayPalService.class);
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+            startService(intent);
+            overridePendingTransition(0, R.anim.exit_slide_right);
+            paymentMethod();
+        }
 
-      // CommonUtils.showToast(mContext,receiverID);
-
-
-        Intent intent = new Intent(this, PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        startService(intent);
-        overridePendingTransition(0, R.anim.exit_slide_right);
-
-        paymentMethod();
     }
 
     public void onBuyPressed(View pressed) {
@@ -153,7 +154,7 @@ public class PaypalActivity extends Activity implements OnWebServiceResult {
 
     private PayPalPayment getThingToBuy(String paymentIntent) {
         //pass amount here...
-        return new PayPalPayment(new BigDecimal(amount), "USD", "Coupon Item",
+        return new PayPalPayment(new BigDecimal(couponAmount), "USD", "Coupon Item",
                 paymentIntent);
     }
 
@@ -255,9 +256,9 @@ public class PaypalActivity extends Activity implements OnWebServiceResult {
                         JSONObject jsonDetails = new JSONObject(paymentDetails);
                         JSONObject detailsObject=jsonDetails.getJSONObject("response");
                         transactionId=detailsObject.getString("id");
-                        CommonUtils.showToast(mContext,getString(R.string.purchasedSuccessfully));
+                       // CommonUtils.showToast(mContext,getString(R.string.purchasedSuccessfully));
                         //call checkout api here....
-                        checkOutApi(tokenId, userId, couponId, amount, transactionId,receiverID);
+                        checkOutApi(tokenId, userId, couponId, couponAmount, transactionId,receiverID);
 
                     } catch (JSONException e) {
                         Log.e(TAG, "an extremely unlikely failure occurred: ", e);
@@ -366,7 +367,7 @@ public class PaypalActivity extends Activity implements OnWebServiceResult {
                     JSONObject jsonObject = new JSONObject(result);
                     int code = JSONUtils.getIntFromJSON(jsonObject, "code");
                     if(code==200){
-                        //CommonUtils.showToast(mContext, JSONUtils.getStringFromJSON(jsonObject, "message"));
+                        CommonUtils.showToast(mContext,getString(R.string.purchasedSuccessfully));
                         Intent intent=new Intent(mContext,BuyCouponActivity.class);
                         startActivity(intent);
                     }else {

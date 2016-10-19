@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,7 +72,6 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
     ContactListAdapter contactsAdapter;
     FriendListAdapter friendsAdapter;
     RequestSentListAdapter requestSentAdapter;
-    boolean callService = false;
 
     ArrayList<syncContactsModel> friendList = new ArrayList<>();
     ArrayList<syncContactsModel> requestSentList = new ArrayList<>();
@@ -81,6 +81,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
     ArrayList<ContactsModel> contacts = new ArrayList<>();
     private static String[] PERMISSIONS_CONTACTS = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS};
     private static final int REQUEST_CONATCT = 1;
+
 
 
     @Override
@@ -94,10 +95,11 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
         addListener();
         tokenId = SharedPreferencesManger.getPrefValue(mContext, Constants.TOKENID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
         userId = SharedPreferencesManger.getPrefValue(mContext, Constants.USERID, SharedPreferencesManger.PREF_DATA_TYPE.STRING).toString();
+
         Intent in = getIntent();
         senderId = in.getStringExtra("senderId");
         messageType = in.getStringExtra("messageType");
-
+//
 /*
         if (messageType != null) {
             alert();
@@ -140,7 +142,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
     }
 
     private void searchFilter() {
-
+        //filter from adapter class
         etSearch.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -178,7 +180,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
 
                         } else if (selectType.equalsIgnoreCase("Requests")) {
                             etSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-                            requestSentAdapter.getFilter().filter(s);
+                            requestSentAdapter.getFilter().filter(s);//check adapter class
                         } else if (selectType.equalsIgnoreCase("Contacts")) {
                             etSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                             contactsAdapter.getFilter().filter(s);
@@ -195,22 +197,6 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
 
 
     }
-
-    public void searchContact(String text) {
-        ContactsModel model;
-        ;
-        for (int i = 0; i < arrListArray.size(); i++) {
-            model = arrListArray.get(i);
-            if (model.getName().toLowerCase().contains(text.toLowerCase())) {
-                sortedArray.add(model);
-            }
-        }
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setAdapter(contactsAdapter);
-        contactsAdapter.notifyDataSetChanged();
-    }
-
 
     @Override
     protected void myToolbar() {
@@ -233,7 +219,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
                 break;
 
             case R.id.tvHomeContacts:
-
+                // set adapter and changes textColor here..
                 selectType = "Contacts";
                 tvcontacts.setTextColor(getResources().getColor(R.color.colorWhite));
                 tvcontacts.setBackgroundResource(R.drawable.home_custom_border_color_contacts);
@@ -250,7 +236,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
 
                 break;
             case R.id.tvHomeFriends:
-
+                // set adapter and changes textColor here..
                 selectType = "Friends";
                 friendsAdapter = new FriendListAdapter(mContext, friendList);
                 recyclerView.setAdapter(friendsAdapter);
@@ -266,7 +252,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
 
                 break;
             case R.id.tvHomeReqSent:
-
+                // set adapter and changes textColor here..
                 selectType = "Requests";
                 requestSentAdapter = new RequestSentListAdapter(mContext, requestSentList);
                 recyclerView.setAdapter(requestSentAdapter);
@@ -286,7 +272,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
 
         }
     }
-
+      //send all contacts number and name from this method...
     private void syncContact(String tokenId, String userId, String searchKeyword) {
 
         try {
@@ -313,7 +299,6 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
                 webService = new CallWebService(mContext, new WebServiceApis(mContext).callApi(), params, Constants.SERVICE_TYPE.SYNCCONTACTS, this);
                 webService.execute();
             } else {
-             //   CommonUtils.showToast(mContext, getString(R.string.internetConnection));
                 CommonUtils.showAlertDialog(this,getString(R.string.no_network_connection),
                         getString(R.string.check_connection));
             }
@@ -327,7 +312,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
         switch (type) {
             case SYNCCONTACTS:
                 try {
-                    System.out.println("Result: " + result);
+                    System.out.println("Result: " + result);//get all result here...
 
                     JSONObject jsonObject = new JSONObject(result);
                     int code = JSONUtils.getIntFromJSON(jsonObject, "code");
@@ -347,20 +332,13 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
                             int status = JSONUtils.getIntFromJSON(resultObject, "status");
 
                             if (status == 1) {
-                                // friendsAdapter.addToArray(model);
                                 friendList.add(model);
-                                //friendsAdapter.notifyDataSetChanged();
                             } else if (status == 2 || status == 3) {
-                                // requestSentAdapter.addToArray(model);
                                 requestSentList.add(model);
-                                //requestSentAdapter.notifyDataSetChanged();
                             }
-                            // contactsAdapter.addToArray(model);
                             else if(status != 3 ) {
                                 contactList.add(model);
                             }
-                            //contactsAdapter.notifyDataSetChanged();
-
                         }
 
                         JSONArray notFoundArray = JSONUtils.getJSONArrayFromJSON(jsonObject, "notFound");
@@ -374,9 +352,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
                             model.setThumbUrl("");
                             model.setStatus("4");
                             model.setNumber(notFoundObject.getString("number"));
-                            // contactsAdapter.addToArray(model);
                             contactList.add(model);
-                            //contactsAdapter.notifyDataSetChanged();
                         }
 
                         friendsAdapter = new FriendListAdapter(mContext, friendList);
@@ -392,7 +368,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
                     e.printStackTrace();
                 }
                 break;
-            case ACCEPTREQUEST:
+            case ACCEPTREQUEST://accept friends request
                 try {
                     System.out.println("Result: " + result);
                     JSONObject jsonObject = new JSONObject(result);
@@ -412,7 +388,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
         }
 
     }
-
+//get all contacts number and name in this class
     class LoadContactsAyscn extends AsyncTask<Void, Void, ArrayList<ContactsModel>> {
         ProgressDialog pd;
 
@@ -435,17 +411,17 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
             Cursor c = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                     null, null, null);
             while (c.moveToNext()) {
-                contactName = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                phNumber = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                contactName = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));//get contacts name
+                phNumber = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));//get contacts number
 
                 ContactsModel model = new ContactsModel();
-                model.setName(contactName);
-                model.setPhoneNumber(phNumber);
+                model.setName(contactName);//set contact name in model
+                model.setPhoneNumber(phNumber);//set contact number in model
                 contacts.add(model);
 
             }
             c.close();
-            Collections.sort(contacts);
+            Collections.sort(contacts);//sorting contact name...
             return contacts;
         }
 
@@ -497,7 +473,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
             e.printStackTrace();
         }
     }
-
+//BackPressed to exist
     public void onBackPressed() {
 
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
@@ -540,7 +516,7 @@ public class HomeActivity extends BaseActivityDrawerMenu implements View.OnClick
         }
 
     }
-
+    //marshMallow permission result
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 

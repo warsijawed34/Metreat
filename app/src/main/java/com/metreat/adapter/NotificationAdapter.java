@@ -42,7 +42,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 inflate(R.layout.notification_list_item, parent, false);
         return new MyViewHolder(itemView);
     }
-
     public void addtoArray(NotificationModel notificationModel) {
         notificationList.add(notificationModel);
     }
@@ -51,10 +50,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final NotificationModel model = notificationList.get(position);
 
-        SimpleDateFormat input = new SimpleDateFormat("dd-MM-yyyy");
+        String comingDate=model.getEventDate();
+
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM");
         try {
-            Date oneWayTripDate = input.parse(model.getEventDate());
+            Date oneWayTripDate = input.parse(comingDate);
             eventDate = output.format(oneWayTripDate).toString();
         } catch (ParseException e) {
             e.printStackTrace();

@@ -111,7 +111,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.My
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, time, number;
+        public TextView name, number;
         public ImageViewRounded image;
         public Button btnSendRequest, btnInvite;
         public FrameLayout frameLayout;

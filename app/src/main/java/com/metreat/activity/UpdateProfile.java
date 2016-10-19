@@ -73,7 +73,7 @@ public class UpdateProfile extends BaseActivityDrawerMenu implements View.OnClic
     private static final int REQUEST_GALLERY = 1;
     private static final int REQUEST_KITKAT_GALLERY = 2;
     private static final int REQUEST_CAMERA = 3;
-    private String dateToStr, data, imagepath, encodedImage = "";
+    private String imagepath, encodedImage = "";
     Bitmap bMap;
     ImageViewRounded ivProfilePhoto;
     CallWebService webService;
