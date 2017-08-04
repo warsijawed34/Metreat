@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vinove on 4/7/16.
+ * Adapter class of BuyCoupon
  */
 
 public class  BuyCouponAdapter extends RecyclerView.Adapter<BuyCouponAdapter.MyViewHolder> {

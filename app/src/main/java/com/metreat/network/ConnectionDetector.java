@@ -6,8 +6,7 @@ import android.net.NetworkInfo;
 
 /**
  * This class is used for Checking for all possible internet providers
- * 
- * By Ankit Kumar
+ *
  * **/
 public class ConnectionDetector {
     private Context mContext;

@@ -23,6 +23,7 @@ import java.util.List;
 public class ReceivedGiftedAdapter extends RecyclerView.Adapter<ReceivedGiftedAdapter.MyViewHolder> {
     List<ReceivedGiftedModel> receivedGiftedList;
     Context mContext;
+
     public ReceivedGiftedAdapter(Context context) {
         this.mContext = context;
         receivedGiftedList = new ArrayList<>();

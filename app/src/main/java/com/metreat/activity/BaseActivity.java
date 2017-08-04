@@ -19,7 +19,7 @@ import java.util.Locale;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    private Context mContext;
+    public Context mContext;
     public ImageView ivIconLeft,ivIconRight;
     public TextView titleName;
     public Toolbar toolbar;
