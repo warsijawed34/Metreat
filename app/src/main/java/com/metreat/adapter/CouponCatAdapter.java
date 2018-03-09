@@ -40,8 +40,7 @@ public class CouponCatAdapter extends RecyclerView.Adapter<CouponCatAdapter.MyVi
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.coupon_cat_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.coupon_cat_item, parent, false);
         return new MyViewHolder(itemView);
     }
     public void addToArray(CouponCatModel model) {
